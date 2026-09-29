@@ -1,0 +1,30 @@
+---
+import SEOHead from '../components/SEOHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  nav?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown>[];
+  minimal?: boolean;
+}
+const { title, description, path, nav = 'home', noindex = false, schema = [], minimal = false } = Astro.props;
+---
+<!doctype html>
+<html lang="en" data-language="en">
+  <head>
+    <SEOHead title={title} description={description} path={path} noindex={noindex} schema={schema} />
+    <link rel="stylesheet" href="/i18n.css" />
+  </head>
+  <body data-page={nav}>
+    {!minimal && <a class="skip-link" href="#main">Skip to content</a>}
+    {!minimal && <Header />}
+    <slot />
+    {!minimal && <Footer />}
+    <script src="/i18n.js" is:inline></script>
+    {!minimal && <script src="/site.js" defer is:inline></script>}
+  </body>
+</html>

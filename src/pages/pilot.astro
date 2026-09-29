@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import bodyHtml from '../content/pages/pilot.html?raw';
+import { pages } from '../data/site';
+const page = pages.pilot;
+---
+<BaseLayout title={page.title} description={page.description} path={page.path} nav={page.nav}>
+  <Fragment set:html={bodyHtml} />
+</BaseLayout>

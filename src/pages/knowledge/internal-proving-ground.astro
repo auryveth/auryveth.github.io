@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import bodyHtml from '../../content/pages/knowledge-internal-proving-ground.html?raw';
+import { knowledgePages } from '../../data/site';
+const page = knowledgePages['internal-proving-ground'];
+---
+<BaseLayout title={page.title} description={page.description} path="/knowledge/internal-proving-ground/" nav="knowledge">
+  <Fragment set:html={bodyHtml} />
+</BaseLayout>

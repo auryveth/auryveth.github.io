@@ -1,0 +1,24 @@
+{
+  "name": "auryveth-website",
+  "private": true,
+  "version": "0.8.0",
+  "type": "module",
+  "scripts": {
+    "predev": "node scripts/generate-brand-assets.mjs && python scripts/generate-constitution.py",
+    "dev": "astro dev",
+    "prebuild": "node scripts/generate-brand-assets.mjs && python scripts/generate-constitution.py",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:source": "node scripts/validate.mjs"
+  },
+  "dependencies": {
+    "astro": "^6.0.0",
+    "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

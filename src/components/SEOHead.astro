@@ -1,0 +1,103 @@
+---
+import { site } from '../data/site';
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown>[];
+}
+const { title, description, path = Astro.url.pathname, noindex = false, schema = [] } = Astro.props;
+const origin = Astro.site ?? new URL(site.url);
+const home = new URL('/', origin).href;
+const canonical = new URL(path, origin).href;
+const socialImage = new URL(site.socialImage, origin).href;
+const socialImageId = socialImage + '#image';
+const brandId = home + '#organization';
+const founderId = home + '#founder';
+const websiteId = home + '#website';
+const founder = {
+  '@type':'Person', '@id':founderId, name:site.founder,
+  url:new URL('/about/#founder', origin).href,
+  jobTitle:'Founder', worksFor:{'@id':brandId}
+};
+const organization = {
+  '@type':'Organization', '@id':brandId,
+  name:site.name, url:home, logo:new URL(site.logo, origin).href,
+  description:site.description,
+  founder:{'@id':founderId}, sameAs:[site.github],
+  knowsAbout:[
+    {'@id':new URL('/knowledge/digital-organism/#term',origin).href},
+    {'@id':new URL('/knowledge/business-organism/#term',origin).href},
+    {'@id':new URL('/knowledge/governed-autonomy/#term',origin).href}
+  ]
+};
+const website = {
+  '@type':'WebSite', '@id':websiteId, name:site.name, url:home,
+  publisher:{'@id':brandId}, about:{'@id':brandId},
+  description:site.description, inLanguage:'en'
+};
+const socialImageObject = {
+  '@type':'ImageObject', '@id':socialImageId, url:socialImage, contentUrl:socialImage,
+  width:1200, height:630, caption:'AURYVETH — governed digital life organisms'
+};
+const mainEntity = schema.find(node => ['DefinedTerm','DefinedTermSet','DigitalDocument'].includes(String(node['@type'])));
+const pageSchema = {
+  '@type':'WebPage', '@id':canonical+'#webpage', name:title, url:canonical,
+  description, inLanguage:'en', isPartOf:{'@id':websiteId},
+  about:{'@id':brandId}, primaryImageOfPage:{'@id':socialImageId},
+  ...(mainEntity ? {mainEntity:{'@id':mainEntity['@id'] || canonical+'#term'}} : {})
+};
+const labels:Record<string,string> = {
+  knowledge:'Knowledge', 'digital-organism':'Digital organism', 'business-organism':'Business organism',
+  'governed-autonomy':'Governed autonomy', 'organism-vs-agent':'Organism vs. agent',
+  'authority-levels':'Authority levels', 'internal-proving-ground':'Internal proving ground'
+};
+const segments=path.split('/').filter(Boolean);
+const breadcrumb = segments.length && !noindex ? {
+  '@type':'BreadcrumbList', '@id':canonical+'#breadcrumb',
+  itemListElement:[
+    {'@type':'ListItem',position:1,name:'Home',item:home},
+    ...segments.map((part,i)=>({
+      '@type':'ListItem',position:i+2,name:labels[part] || (i===segments.length-1 ? title.replace(/ — AURYVETH$/i,'') : part),
+      item:new URL('/'+segments.slice(0,i+1).join('/')+'/',origin).href
+    }))
+  ]
+} : null;
+const nodes=[organization,founder,website,socialImageObject,pageSchema,...schema.map(({['@context']: _context,...node})=>node),...(breadcrumb?[breadcrumb]:[])];
+const graph = {'@context':'https://schema.org','@graph':nodes};
+const graphJson = JSON.stringify(graph).replace(/</g,'\u003c');
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#020912" />
+<meta name="description" content={description} />
+<meta name="application-name" content={site.name} />
+<meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+{!noindex && <link rel="canonical" href={canonical} />}
+{!noindex && <link rel="alternate" hreflang="en" href={canonical} />}
+{!noindex && <link rel="alternate" hreflang="x-default" href={canonical} />}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={socialImage} />
+<meta property="og:image:secure_url" content={socialImage} />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:alt" content="AURYVETH — governed digital life organisms" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImage} />
+<meta name="twitter:image:alt" content="AURYVETH — governed digital life organisms" />
+<link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
+<link rel="icon" href="/assets/favicons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="stylesheet" href="/styles.css" />
+<title>{title}</title>
+{!noindex && <script type="application/ld+json" set:html={graphJson} />}

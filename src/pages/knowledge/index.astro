@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import bodyHtml from '../../content/pages/knowledge-index.html?raw';
+const schema = [{
+  '@type':'DefinedTermSet', '@id':new URL('/knowledge/#definitions',Astro.site).href,
+  name:'AURYVETH Knowledge — first-party definitions',
+  description:'Definitions and explanatory pages about AURYVETH’s digital organisms, business organisms and governed autonomy.',
+  url:new URL('/knowledge/',Astro.site).href,
+  hasDefinedTerm:[
+    {'@id':new URL('/knowledge/digital-organism/#term',Astro.site).href},
+    {'@id':new URL('/knowledge/business-organism/#term',Astro.site).href},
+    {'@id':new URL('/knowledge/governed-autonomy/#term',Astro.site).href}
+  ]
+}];
+---
+<BaseLayout title={"AURYVETH Knowledge \u2014 Definitions"} description={"Explore AURYVETH’s original definitions, proposed authority model, internal proving-ground plan and related first-party explanations."} path={"/knowledge/"} nav="knowledge" schema={schema}>
+  <Fragment set:html={bodyHtml} />
+</BaseLayout>

@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import bodyHtml from '../content/pages/404.html?raw';
+---
+<BaseLayout title="Page not found — Auryveth" description="Auryveth page not found." path="/404.html" noindex minimal>
+  <Fragment set:html={bodyHtml} />
+</BaseLayout>

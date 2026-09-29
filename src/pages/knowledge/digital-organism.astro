@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import bodyHtml from '../../content/pages/knowledge-digital-organism.html?raw';
+const schema = [{'@type':'DefinedTerm','@id':new URL('/knowledge/digital-organism/#term',Astro.site).href,name:"Digital organism",description:"A persistent digital-life system designed by AURYVETH to build, learn and evolve as experience accumulates while remaining governed by explicit authority boundaries.",inDefinedTermSet:new URL('/knowledge/', Astro.site).href,url:new URL("/knowledge/digital-organism/", Astro.site).href}];
+---
+<BaseLayout title={"What Is a Digital Organism? \u2014 AURYVETH"} description={"Learn how AURYVETH defines a digital organism: persistent digital life designed to build, learn and evolve over time under explicit governance."} path={"/knowledge/digital-organism/"} nav="knowledge" schema={schema}>
+  <Fragment set:html={bodyHtml} />
+</BaseLayout>

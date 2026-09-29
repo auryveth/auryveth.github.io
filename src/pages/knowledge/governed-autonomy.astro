@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import bodyHtml from '../../content/pages/knowledge-governed-autonomy.html?raw';
+const schema = [{'@type':'DefinedTerm','@id':new URL('/knowledge/governed-autonomy/#term',Astro.site).href,name:"Governed autonomy",description:"An approach that separates developing digital-organism capability from explicitly granted, bounded operational authority.",inDefinedTermSet:new URL('/knowledge/', Astro.site).href,url:new URL("/knowledge/governed-autonomy/", Astro.site).href}];
+---
+<BaseLayout title={"What Is Governed Autonomy? \u2014 AURYVETH"} description={"Learn how AURYVETH separates a digital organism\u2019s improving capabilities from its explicitly granted operational authority."} path={"/knowledge/governed-autonomy/"} nav="knowledge" schema={schema}>
+  <Fragment set:html={bodyHtml} />
+</BaseLayout>

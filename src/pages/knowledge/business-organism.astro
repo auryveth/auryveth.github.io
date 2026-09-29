@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import bodyHtml from '../../content/pages/knowledge-business-organism.html?raw';
+const schema = [{'@type':'DefinedTerm','@id':new URL('/knowledge/business-organism/#term',Astro.site).href,name:"Business organism",description:"A persistent digital system designed to understand approved operational context, prepare and coordinate work, and earn bounded autonomy through demonstrated reliability.",inDefinedTermSet:new URL('/knowledge/', Astro.site).href,url:new URL("/knowledge/business-organism/", Astro.site).href}];
+---
+<BaseLayout title={"What Is a Business Organism? \u2014 AURYVETH"} description={"Learn how AURYVETH defines a business organism: persistent operational context, decision preparation and bounded autonomy."} path={"/knowledge/business-organism/"} nav="knowledge" schema={schema}>
+  <Fragment set:html={bodyHtml} />
+</BaseLayout>

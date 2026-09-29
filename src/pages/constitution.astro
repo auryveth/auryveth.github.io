@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import bodyHtml from '../content/pages/constitution.html?raw';
+import { pages } from '../data/site';
+const page = pages.constitution;
+const schema = [{
+  '@type':'DigitalDocument', '@id':new URL('/constitution/#document',Astro.site).href,
+  name:'AURYVETH Founder Constitution v0.1',
+  description:'The versioned founding governance record; the web page provides a readable summary.',
+  url:new URL('/documents/Auryveth_Founder_Constitution_v0.1.pdf',Astro.site).href,
+  encodingFormat:'application/pdf', dateCreated:'2026-09-23',
+  publisher:{'@id':new URL('/#organization',Astro.site).href}
+}];
+---
+<BaseLayout title={page.title} description={page.description} path={page.path} nav={page.nav} schema={schema}>
+  <Fragment set:html={bodyHtml} />
+</BaseLayout>
