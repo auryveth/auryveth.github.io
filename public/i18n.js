@@ -990,6 +990,9 @@
     "See the staged roadmap →": "查看分阶段路线图 →",
     "Explore Digital Life research": "探索数字生命研究",
 
+    "Business Organisms are a planned Digital Life specialization for organizational work, built on top of the coordination and execution foundations AURYVETH is developing first. The target is a persistent operational system connected to approved business context, able to learn from outcomes over time, and governed by explicit authority boundaries.": "商业生命体是面向组织工作的规划中数字生命专精，建立在 AURYVETH 优先开发的协作与执行基础之上。目标是一种连接获准业务上下文的持续型运营系统，能够随时间从结果中学习，并受到明确权限边界治理。",
+    "Meet AURYVETH and its founder, Jeremiah Wong Zhi Qi. AURYVETH is building Blackboard first, alongside governed Digital Life research and the foundations for future business and personal ecosystems.": "了解 AURYVETH 及其创始人 Jeremiah Wong Zhi Qi。AURYVETH 正在优先构建 Blackboard，同时推进受治理的数字生命研究，并建立未来商业与个人生态系统所需的基础。",
+
     /* Accessibility labels used in page bodies */
     "Conceptual visualization of a continuously active Auryveth digital organism": "持续运行的 Auryveth 数字生命体概念可视化",
     "Auryveth operating thesis": "Auryveth 运营理念",
