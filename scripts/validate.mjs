@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const pages=['index','organisms','research','roadmap','constitution','investors','about','pilot','privacy'];
+const pages=['index','blackboard','organisms','research','roadmap','constitution','investors','about','pilot','privacy'];
 for(const page of pages){
  if(!fs.existsSync(`src/pages/${page}.astro`))throw Error(`Missing Astro page ${page}`);
  if(!fs.existsSync(`src/content/pages/${page}.html`))throw Error(`Missing page body ${page}`);
