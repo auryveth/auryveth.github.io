@@ -892,6 +892,7 @@
     "Specialized workers prepare the solution together.": "专业化数字工作者共同准备方案。",
     "Relevant digital workers gather options, costs, evidence, dependencies and proposed actions.": "相关数字工作者汇总选项、成本、证据、依赖关系与拟议行动。",
     "Authorization": "授权",
+    "Authority": "权限",
     "The responsible human reviews the decision package.": "负责的人类审核完整决策材料。",
     "Approve, reject or modify the proposed transaction before consequential authority is released.": "在释放重大行动权限前，对拟议交易进行批准、拒绝或修改。",
     "Bounded execution": "有限执行",
