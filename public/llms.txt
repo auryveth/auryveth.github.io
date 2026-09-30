@@ -1,12 +1,13 @@
 # AURYVETH
 
-> AURYVETH is a technology and research company developing governed digital life organisms: persistent digital systems designed to build, learn and evolve as experience accumulates, operate within approved context, and progressively earn bounded autonomy under explicit human authority.
+> AURYVETH is building a human-authorized Digital Life ecosystem. Its first product is AURYVETH Blackboard, a governed coordination layer for humans, digital workers and future Digital Life Organisms. The long-term model is: humans retain consequential authority while Digital Life carries more of the operational work.
 
 Canonical site: https://auryveth.github.io/
 
 ## Start here
 
 - [AURYVETH](https://auryveth.github.io/): Official company overview and operating thesis.
+- [AURYVETH Blackboard](https://auryveth.github.io/blackboard/): First product and governed coordination foundation.
 - [About AURYVETH](https://auryveth.github.io/about/): Company and founder context.
 - [Knowledge & Definitions](https://auryveth.github.io/knowledge/): First-party definitions and explanatory pages.
 
