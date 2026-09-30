@@ -2,8 +2,8 @@
 export const site = {
   name: 'AURYVETH',
   url: 'https://auryveth.github.io',
-  tagline: 'We build. We learn. We evolve — toward a better future.',
-  description: 'AURYVETH develops governed digital life organisms: persistent systems designed to build, learn and evolve as experience accumulates, while earning bounded autonomy under explicit human authority.',
+  tagline: 'Humans authorize. Digital Life Organisms do the work.',
+  description: 'AURYVETH is building a human-authorized Digital Life ecosystem. Its first product, Blackboard, coordinates humans and digital workers while preserving explicit authority, evidence and organizational boundaries.',
   founder: 'Jeremiah Wong Zhi Qi',
   github: 'https://github.com/auryveth',
   logo: '/assets/logos/Auryveth_Logo_Horizontal_Corporate.svg',
@@ -13,8 +13,8 @@ export const site = {
 
 export const pages = {
   "home": {
-    "title": "AURYVETH — Governed Digital Life Organisms",
-    "description": "AURYVETH develops governed digital life organisms designed to build, learn and evolve over time, with bounded autonomy under explicit human authority.",
+    "title": "AURYVETH — Human-Authorized Digital Life Ecosystem",
+    "description": "AURYVETH is building a human-authorized Digital Life ecosystem, beginning with Blackboard: coordination infrastructure for humans, digital workers and future Digital Life Organisms.",
     "path": "/",
     "nav": "home"
   },
@@ -23,6 +23,12 @@ export const pages = {
     "description": "Meet AURYVETH and its founder, Jeremiah Wong Zhi Qi. AURYVETH is developing governed digital life organisms, business organisms and autonomous business systems.",
     "path": "/about/",
     "nav": "about"
+  },
+  "blackboard": {
+    "title": "AURYVETH Blackboard — Governed Coordination for Digital Work",
+    "description": "AURYVETH Blackboard is the company’s first product: a governed coordination layer for humans, digital workers and future Digital Life Organisms.",
+    "path": "/blackboard/",
+    "nav": "blackboard"
   },
   "organisms": {
     "title": "Digital Business Organisms — AURYVETH",
@@ -37,8 +43,8 @@ export const pages = {
     "nav": "research"
   },
   "roadmap": {
-    "title": "Governed Autonomy Roadmap — AURYVETH",
-    "description": "Auryveth’s capability-gated roadmap progresses from a single business organism to governed inter-company coordination.",
+    "title": "AURYVETH Roadmap — Blackboard to Digital Life Ecosystem",
+    "description": "AURYVETH’s capability-gated roadmap begins with Blackboard, expands into governed Digital Life Organisms, and later connects companies, personal services and physical interfaces.",
     "path": "/roadmap/",
     "nav": "roadmap"
   },
@@ -50,7 +56,7 @@ export const pages = {
   },
   "investors": {
     "title": "Investors & Strategic Partners — AURYVETH",
-    "description": "Auryveth’s investor thesis connects near-term business automation value with long-term persistent digital organism infrastructure.",
+    "description": "AURYVETH’s investor thesis begins with Blackboard as coordination infrastructure, then expands into governed digital workforces and a broader Digital Life ecosystem.",
     "path": "/investors/",
     "nav": "investors"
   },
@@ -80,7 +86,7 @@ export const knowledgePages = {
 } as const;
 
 export const indexedPaths = [
-  '/', '/organisms/', '/research/', '/roadmap/', '/constitution/',
+  '/', '/blackboard/', '/organisms/', '/research/', '/roadmap/', '/constitution/',
   '/investors/', '/about/', '/pilot/', '/privacy/',
   '/knowledge/', '/knowledge/digital-organism/', '/knowledge/business-organism/', '/knowledge/governed-autonomy/',
   '/knowledge/organism-vs-agent/', '/knowledge/authority-levels/', '/knowledge/internal-proving-ground/'
