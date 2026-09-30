@@ -20,7 +20,7 @@ export const pages = {
   },
   "about": {
     "title": "About AURYVETH — Governed Digital Life Organisms",
-    "description": "Meet AURYVETH and its founder, Jeremiah Wong Zhi Qi. AURYVETH is developing governed digital life organisms, business organisms and autonomous business systems.",
+    "description": "Meet AURYVETH and its founder, Jeremiah Wong Zhi Qi. AURYVETH is building Blackboard first, alongside governed Digital Life research and the foundations for future business and personal ecosystems.",
     "path": "/about/",
     "nav": "about"
   },
