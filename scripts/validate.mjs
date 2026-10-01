@@ -17,6 +17,8 @@ for(const asset of [
  'public/i18n.css',
  'public/llms.txt',
  'public/sitemap.xml',
+ 'public/sitemap.txt',
+ 'public/robots.txt',
  'public/assets/logos/Auryveth_Logo_Horizontal_White.svg',
  'public/assets/logos/Auryveth_Logo_Horizontal_Corporate.svg',
  'public/assets/logos/Auryveth_Logo_Emblem_Corporate.svg',
