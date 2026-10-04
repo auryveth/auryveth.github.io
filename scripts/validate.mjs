@@ -23,7 +23,7 @@ for(const asset of [
  'public/assets/logos/Auryveth_Logo_Horizontal_Corporate.svg',
  'public/assets/logos/Auryveth_Logo_Emblem_Corporate.svg',
  'public/assets/social/Auryveth_Social_Avatar_1024.png',
- 'brand-source/founder-constitution-v0.1.source.pdf',
+ 'scripts/generate-constitution.py',
  'public/.nojekyll'
 ]){
  if(!fs.existsSync(asset))throw Error(`Missing ${asset}`);
@@ -32,10 +32,22 @@ const src=fs.readFileSync('src/data/site.ts','utf8');
 if(!src.includes('auryveth.github.io'))throw Error('Wrong AURYVETH GitHub Pages origin');
 if(!src.includes("name: 'AURYVETH'"))throw Error('Public brand not switched to AURYVETH');
 if(src.includes('hello@'))throw Error('Invented email');
+const constitution=fs.readFileSync('src/content/pages/constitution.html','utf8');
+for(const marker of ['C-01','C-18','Permanent death','No self-granted power','Ecosystem Constitution v0.1']){
+ if(!constitution.includes(marker))throw Error(`Constitution v0.1 public copy missing: ${marker}`);
+}
+const constitutionGenerator=fs.readFileSync('scripts/generate-constitution.py','utf8');
+for(const marker of ['Auryveth_Ecosystem_Constitution_v0.1.pdf','35e440729768529c94f7411d0de0c3dd1d2bf72f','55c7417997b315ae8a5fb4f5c304d98832120695']){
+ if(!constitutionGenerator.includes(marker))throw Error(`Constitution PDF generator missing: ${marker}`);
+}
+if(constitutionGenerator.includes('founder-constitution-v0.1.source.pdf'))throw Error('Constitution generator still depends on stale Founder Constitution source PDF');
+
 const llms=fs.readFileSync('public/llms.txt','utf8');
 if(!llms.includes('https://auryveth.github.io/knowledge/digital-organism/'))throw Error('llms.txt missing canonical digital-organism definition');
 if(!llms.includes('https://auryveth.github.io/knowledge/business-organism/'))throw Error('llms.txt missing canonical business-organism definition');
 if(!llms.includes('Interpretation and evidence boundary'))throw Error('llms.txt missing evidence boundary');
+if(!llms.includes('Frozen constitutional facts'))throw Error('llms.txt missing frozen constitutional facts');
+if(!llms.includes('Ecosystem Constitution v0.1'))throw Error('llms.txt missing Constitution v0.1');
 
 function walk(dir){
  return fs.readdirSync(dir,{withFileTypes:true}).flatMap(d=>d.isDirectory()?walk(path.join(dir,d.name)):[path.join(dir,d.name)]);
