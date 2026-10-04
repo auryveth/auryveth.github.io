@@ -226,7 +226,6 @@ shutil.copyfile(DST, LEGACY)
 
 check = fitz.open(DST)
 text = "\n".join(p.get_text() for p in check)
-check.close()
 for token in ["C-01","C-18","Permanent death","No self-granted power",REVIEWED_HEAD,MERGE_SHA]:
     if token not in text:
         raise SystemExit(f"ERROR: generated Constitution missing {token}")
