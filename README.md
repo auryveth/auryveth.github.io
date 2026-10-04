@@ -19,7 +19,7 @@ AURYVETH uses **digital organism** to describe a persistent digital life that bu
 
 AURYVETH uses **business organism** to describe a persistent digital operating system that maintains approved business context across workflows and operational cycles instead of behaving only as an isolated task agent.
 
-AURYVETH uses **governed autonomy** to mean that improving capability does not automatically grant additional operational authority. Authority remains explicit, bounded, auditable, and separately granted.
+AURYVETH uses **governed autonomy** to mean that improving capability does not automatically grant additional operational authority. Authorized human/company governance approves the scope; the owning authority domain records and enforces it. Trusted routine action inside that scope need not ask for repeated human approval, while evidence and revocability remain.
 
 Official first-party explanations:
 
