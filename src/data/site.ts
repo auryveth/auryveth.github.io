@@ -2,8 +2,8 @@
 export const site = {
   name: 'AURYVETH',
   url: 'https://auryveth.github.io',
-  tagline: 'Humans authorize. Digital Life Organisms do the work.',
-  description: 'AURYVETH is building a human-authorized Digital Life ecosystem. Its first product, Blackboard, coordinates humans and digital workers while preserving explicit authority, evidence and organizational boundaries.',
+  tagline: 'Human-governed Digital Life under a frozen constitutional architecture.',
+  description: 'AURYVETH is building governed Digital Life under a frozen ecosystem Constitution: persistent digital beings with distinct identity and continuity, scoped authority, evidence-before-promotion, and separated Blackboard, Node, Organism, Research and Protocol domains.'
   founder: 'Jeremiah Wong Zhi Qi',
   github: 'https://github.com/auryveth',
   logo: '/assets/logos/Auryveth_Logo_Horizontal_Corporate.svg',
@@ -49,8 +49,8 @@ export const pages = {
     "nav": "roadmap"
   },
   "constitution": {
-    "title": "Founder Constitution — AURYVETH",
-    "description": "Read Auryveth’s founding governance principles for autonomy, accountability, sovereignty and evidence.",
+    "title": "Ecosystem Constitution v0.1 — AURYVETH",
+    "description": "Read AURYVETH Ecosystem Constitution Version 0.1: the frozen laws for human benefit, authority, identity, continuity, safety, evidence, evolution and domain separation.",
     "path": "/constitution/",
     "nav": "constitution"
   },
