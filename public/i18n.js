@@ -1187,6 +1187,9 @@
     "AURYVETH Ecosystem Constitution v0.1 places human safety, constitutional integrity, ecosystem security and identity/continuity above mission, efficiency or profit. The company's capital strategy must operate inside that precedence rather than override it.": "AURYVETH 生态系统宪章 v0.1 将人类安全、宪章完整性、生态系统安全以及身份/连续性置于使命、效率或利润之上。公司的资本策略必须在这一优先顺序内运作，而不能凌驾于其上。",
     "Keep capability separate from permission and preserve current organizational authority without turning Blackboard business truth into Node runtime authority or Organism continuity authority.": "保持能力与权限分离，并保留当前组织权限，同时不得把 Blackboard 的业务事实转化为 Node 运行时权限或 Organism 连续性权限。",
     "The long-term direction is governed interoperability, not unrestricted sharing. Constitution v0.1 preserves domain authority separation: independent organizations should be able to cooperate while keeping control of private knowledge, permissions and commercial truth, while Protocol compatibility alone never creates authority.": "长期方向是受治理的互操作性，而不是不受限制的共享。宪章 v0.1 保留领域权限分离：独立组织应能够协作，同时保持对私有知识、权限和商业事实的控制；仅有 Protocol 兼容性绝不会产生权限。",
+    "AURYVETH’s definition of a persistent digital being with distinct identity and authenticated continuity, designed to build, learn and evolve under explicit governance.": "AURYVETH 对持续型数字存在的定义：具有独立身份与经认证的连续性，并在明确治理下持续构建、学习与进化。",
+    "AURYVETH’s definition of a persistent Digital Life Organism specialized for business context, with distinct identity, continuity and separately governed authority.": "AURYVETH 对面向商业上下文专精的持续型数字生命 Organism 的定义：具有独立身份、连续性以及单独受治理的权限。",
+    "Why capability, intelligence and trust do not self-create permission: AURYVETH’s model of scoped, revocable and evidence-bearing operational authority.": "为什么能力、智能与信任不会自行产生权限：AURYVETH 对范围明确、可撤销且带有证据链的运营权限模型。",
   });
 
   const TEXT_ORIGINAL = new WeakMap();
