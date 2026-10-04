@@ -1,6 +1,6 @@
 # AURYVETH SEO / GEO release strategy — v0.6
 
-**Scope:** official static website at https://auryveth.github.io/. The first-party material describes the actual founding record, planned operating model and research direction. It is not evidence of a deployed generalized autonomous organism.
+**Scope:** official static website at https://auryveth.github.io/. The first-party material describes the frozen constitutional record, planned operating model and research direction. It is not evidence of a deployed generalized autonomous organism.
 
 ## 1. What this upgrade actually does
 
@@ -15,9 +15,9 @@
 
 AURYVETH is a technology and research company developing governed digital business organisms. A business organism is AURYVETH's term for a persistent digital system designed to learn an organization's approved operating context, prepare work, coordinate activity and progressively earn bounded autonomy.
 
-Use clear distinctions throughout: *definition*, *proposed architecture*, *planned validation*, *published founding record*, and *observed experimental result*. A proposal must never be represented as measured production capability. Avoid claims about clients, trials, incorporation/registration, funding, performance, pricing, independent recognition, private dataset results, autonomous agency or press coverage unless documented and approved.
+Use clear distinctions throughout: *definition*, *proposed architecture*, *planned validation*, *published constitutional record*, and *observed experimental result*. A proposal must never be represented as measured production capability. Avoid claims about clients, trials, incorporation/registration, funding, performance, pricing, independent recognition, private dataset results, autonomous agency or press coverage unless documented and approved.
 
-The founder's public name is Jeremiah Wong Zhi Qi. The first-party founding record is the versioned Founder Constitution PDF. The verified AURYVETH GitHub organization is the only repository identity used as `sameAs`; do not populate fabricated social profiles, addresses, registration data or email addresses.
+The founder's public name is Jeremiah Wong Zhi Qi. The first-party constitutional record is the frozen AURYVETH Ecosystem Constitution Version 0.1 PDF. It is an architecture/governance record, not a claim of current external legal personhood for Organisms or proof that every derived mechanism is deployed. The verified AURYVETH GitHub organization is the only repository identity used as `sameAs`; do not populate fabricated social profiles, addresses, registration data or email addresses.
 
 ## 3. AI search and conventional search
 

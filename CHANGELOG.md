@@ -40,3 +40,13 @@
 - Prepared the organization-root Pages repository name `auryveth.github.io`.
 - Canonical site origin, sitemap, robots, structured data and webmaster instructions now target `https://auryveth.github.io/`.
 - Restores the verified GitHub organization as the public Organization `sameAs` identity after the namespace migration.
+
+
+## v0.9.0 — Ecosystem Constitution v0.1 public synchronization
+
+- Replaces the public Founder Constitution framing with the frozen **AURYVETH Ecosystem Constitution Version 0.1** adopted after cross-repository constitutional review.
+- Publishes C-01 through C-18 covering human-benefit purpose, constitutional supremacy, independent Organism identity, scoped authority, continuity, permanent death, governed birth, revocable trust, unknown-state safety, Research-gated self-change, evidence-before-promotion, succession and domain separation.
+- Aligns About, Organisms, Research, Roadmap and governance knowledge pages with the frozen constitutional boundaries.
+- Adds full Simplified Chinese coverage for the new constitutional public copy.
+- Replaces the old rebrand-only PDF pipeline with a generated English archival Ecosystem Constitution PDF while retaining the legacy Founder Constitution filename as a compatibility alias.
+- Updates JSON-LD, AI/search guidance and validation gates without claiming legal personhood, deployed general autonomy or completion of deferred ecosystem mechanisms.

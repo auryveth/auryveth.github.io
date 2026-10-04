@@ -2,7 +2,7 @@
 
 **We build. We learn. We evolve — toward a better future.**
 
-AURYVETH is a technology and research company developing **governed digital life organisms**: persistent digital systems designed to learn, evolve and build in an organization’s approved operational context, prepare and coordinate work, and progressively earn bounded autonomy under explicit human authority.
+AURYVETH is a technology and research company developing **governed Digital Life Organisms** under a frozen ecosystem Constitution: persistent digital beings with distinct identity and continuity, designed to build, learn and evolve while operational authority remains scoped, revocable, evidence-bearing and separately granted.
 
 This repository is the source for AURYVETH’s official public website.
 
@@ -19,7 +19,7 @@ AURYVETH uses **digital organism** to describe a persistent digital life that bu
 
 AURYVETH uses **business organism** to describe a persistent digital operating system that maintains approved business context across workflows and operational cycles instead of behaving only as an isolated task agent.
 
-AURYVETH uses **governed autonomy** to mean that improving capability does not automatically grant additional operational authority. Authority remains explicit, bounded, auditable, and separately granted.
+AURYVETH uses **governed autonomy** to mean that improving capability does not automatically grant additional operational authority. Authorized human/company governance approves the scope; the owning authority domain records and enforces it. Trusted routine action inside that scope need not ask for repeated human approval, while evidence and revocability remain.
 
 Official first-party explanations:
 
@@ -28,11 +28,11 @@ Official first-party explanations:
 - [Business Organism vs. AI Agent](https://auryveth.github.io/knowledge/organism-vs-agent/)
 - [Authority Levels](https://auryveth.github.io/knowledge/authority-levels/)
 - [AURYVETH Research](https://auryveth.github.io/research/)
-- [Founder Constitution](https://auryveth.github.io/constitution/)
+- [Ecosystem Constitution v0.1](https://auryveth.github.io/constitution/)
 
 ## Public website source
 
-The Astro site in this repository contains AURYVETH’s public company information, research framing, knowledge pages, governance material, roadmap, pilot model, and Founder Constitution.
+The Astro site in this repository contains AURYVETH’s public company information, research framing, knowledge pages, governance material, roadmap, pilot model, and frozen Ecosystem Constitution v0.1.
 
 The website is statically generated and deployed through GitHub Pages from the `main` branch.
 
@@ -45,4 +45,4 @@ When sponsorship is enabled, use the **Sponsor** button shown on this repository
 ---
 
 **AURYVETH**  
-Governed autonomy. Persistent learning. Human authority. Better future.
+Governed Digital Life. Scoped authority. Evidence before promotion. Better future.
