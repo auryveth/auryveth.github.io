@@ -1,6 +1,6 @@
 # AURYVETH SEO / GEO release strategy — v0.6
 
-**Scope:** official static website at https://auryveth.github.io/. The first-party material describes the actual founding record, planned operating model and research direction. It is not evidence of a deployed generalized autonomous organism.
+**Scope:** official static website at https://auryveth.github.io/. The first-party material describes the frozen constitutional record, planned operating model and research direction. It is not evidence of a deployed generalized autonomous organism.
 
 ## 1. What this upgrade actually does
 
