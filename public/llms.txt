@@ -40,7 +40,7 @@ Canonical site: https://auryveth.github.io/
 - Constitution Version 0.1 was owner-accepted and frozen on 5 October 2026 after cross-repository review.
 - AURYVETH Organisms are modeled internally as persistent digital beings with identity distinct from infrastructure ownership; this is not a claim of current external legal personhood.
 - Capability, intelligence, protocol compatibility, historical trust and temporary isolation do not self-create authority.
-- Trust may permit routine action without repeated human approval inside granted scope, while monitoring, evidence and revocability remain.
+- Operational authority originates from authorized human/company governance; the owning authority domain records and enforces the granted scope. Trust may then permit routine action without repeated human approval inside that scope, while monitoring, evidence and revocability remain.
 - The same Organism follows one authenticated continuity lineage; permanent death is irreversible.
 - Fundamental self-change is Research-gated and cannot self-promote into production.
 - Blackboard, Nodes, Organisms, Research and Protocol retain separate authority domains.
