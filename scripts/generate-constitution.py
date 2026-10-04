@@ -7,6 +7,23 @@ OUT = ROOT / "public" / "documents"
 OUT.mkdir(parents=True, exist_ok=True)
 DST = OUT / "Auryveth_Ecosystem_Constitution_v0.1.pdf"
 LEGACY = OUT / "Auryveth_Founder_Constitution_v0.1.pdf"
+LOGO_CORPORATE = ROOT / "public" / "assets" / "logos" / "Auryveth_Logo_Horizontal_Corporate.svg"
+LOGO_WHITE = ROOT / "public" / "assets" / "logos" / "Auryveth_Logo_Horizontal_White.svg"
+
+for required_logo in (LOGO_CORPORATE, LOGO_WHITE):
+    if not required_logo.exists():
+        raise SystemExit(f"ERROR: required AURYVETH document logo missing: {required_logo}")
+
+def svg_to_png_bytes(path, scale=3):
+    svg = fitz.open(str(path))
+    try:
+        pix = svg[0].get_pixmap(matrix=fitz.Matrix(scale, scale), alpha=True)
+        return pix.tobytes("png")
+    finally:
+        svg.close()
+
+LOGO_CORPORATE_PNG = svg_to_png_bytes(LOGO_CORPORATE)
+LOGO_WHITE_PNG = svg_to_png_bytes(LOGO_WHITE)
 
 TITLE = "AURYVETH Ecosystem Constitution - Version 0.1"
 STATUS = "PASS / ACCEPTED / FROZEN / CROSS-REPOSITORY-CONFORMANT"
@@ -62,7 +79,7 @@ PRECEDENCE = [
 ]
 
 PAGE_W, PAGE_H = fitz.paper_size("a4")
-MARGIN_X, TOP, BOTTOM = 54, 52, 52
+MARGIN_X, TOP, BOTTOM = 54, 68, 52
 BODY_W = PAGE_W - 2 * MARGIN_X
 NAVY = (1/255, 41/255, 92/255)
 TEAL = (1/255, 164/255, 173/255)
@@ -91,6 +108,14 @@ class Writer:
         self.page = self.doc.new_page(width=PAGE_W, height=PAGE_H)
         self.page_no += 1
         self.y = TOP
+        if self.page_no > 1:
+            self.page.insert_image(
+                fitz.Rect(MARGIN_X, 18, MARGIN_X + 128, 44),
+                stream=LOGO_CORPORATE_PNG,
+                keep_proportion=True,
+                overlay=True,
+            )
+            self.page.draw_line((MARGIN_X, 50), (PAGE_W-MARGIN_X, 50), color=(0.84,0.87,0.9), width=0.5)
         self.page.draw_line((MARGIN_X, PAGE_H-33), (PAGE_W-MARGIN_X, PAGE_H-33), color=(0.84,0.87,0.9), width=0.5)
         self.page.insert_text((MARGIN_X, PAGE_H-20), "AURYVETH Ecosystem Constitution v0.1", fontsize=7.5, fontname="helv", color=MUTED)
         self.page.insert_text((PAGE_W-MARGIN_X-28, PAGE_H-20), str(self.page_no), fontsize=7.5, fontname="helv", color=MUTED)
@@ -118,8 +143,13 @@ class Writer:
 
 w = Writer()
 w.page.draw_rect(fitz.Rect(0,0,PAGE_W,210), color=NAVY, fill=NAVY)
-w.page.insert_text((MARGIN_X,88), "AURYVETH", fontsize=28, fontname="hebo", color=(1,1,1))
-w.page.insert_text((MARGIN_X,130), "ECOSYSTEM CONSTITUTION", fontsize=22, fontname="hebo", color=(1,1,1))
+w.page.insert_image(
+    fitz.Rect(MARGIN_X, 38, MARGIN_X + 190, 78),
+    stream=LOGO_WHITE_PNG,
+    keep_proportion=True,
+    overlay=True,
+)
+w.page.insert_text((MARGIN_X,128), "ECOSYSTEM CONSTITUTION", fontsize=22, fontname="hebo", color=(1,1,1))
 w.page.insert_text((MARGIN_X,160), "Version 0.1", fontsize=15, fontname="helv", color=(0.8,0.95,0.96))
 w.y = 252
 w.text(STATUS, size=10.2, font="hebo", color=TEAL, gap=14)
@@ -198,5 +228,11 @@ check = fitz.open(DST)
 text = "\n".join(p.get_text() for p in check)
 check.close()
 for token in ["C-01","C-18","Permanent death","No self-granted power",REVIEWED_HEAD,MERGE_SHA]:
-    if token not in text: raise SystemExit(f"ERROR: generated Constitution missing {token}")
-print(f"PASS PDF constitution: {DST.name} ({DST.stat().st_size} bytes); legacy alias retained")
+    if token not in text:
+        raise SystemExit(f"ERROR: generated Constitution missing {token}")
+if not check[0].get_images(full=True):
+    raise SystemExit("ERROR: Constitution cover is missing the required AURYVETH logo image")
+if check.page_count > 1 and not check[1].get_images(full=True):
+    raise SystemExit("ERROR: Constitution interior pages are missing the required AURYVETH logo header")
+check.close()
+print(f"PASS PDF constitution: {DST.name} ({DST.stat().st_size} bytes); AURYVETH logos embedded; legacy alias retained")
