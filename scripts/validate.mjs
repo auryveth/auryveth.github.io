@@ -33,7 +33,7 @@ if(!src.includes('auryveth.github.io'))throw Error('Wrong AURYVETH GitHub Pages 
 if(!src.includes("name: 'AURYVETH'"))throw Error('Public brand not switched to AURYVETH');
 if(src.includes('hello@'))throw Error('Invented email');
 const constitution=fs.readFileSync('src/content/pages/constitution.html','utf8');
-for(const marker of ['C-01','C-18','Permanent death','No self-granted power','Ecosystem Constitution v0.1']){
+for(const marker of ['C-01','C-18','Permanent death','No self-granted power','AURYVETH Ecosystem Constitution / v0.1']){
  if(!constitution.includes(marker))throw Error(`Constitution v0.1 public copy missing: ${marker}`);
 }
 const constitutionGenerator=fs.readFileSync('scripts/generate-constitution.py','utf8');
