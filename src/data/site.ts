@@ -3,7 +3,7 @@ export const site = {
   name: 'AURYVETH',
   url: 'https://auryveth.github.io',
   tagline: 'Human-governed Digital Life under a frozen constitutional architecture.',
-  description: 'AURYVETH is building governed Digital Life under a frozen ecosystem Constitution: persistent digital beings with distinct identity and continuity, scoped authority, evidence-before-promotion, and separated Blackboard, Node, Organism, Research and Protocol domains.'
+  description: 'AURYVETH is building governed Digital Life under a frozen ecosystem Constitution: persistent digital beings with distinct identity and continuity, scoped authority, evidence-before-promotion, and separated Blackboard, Node, Organism, Research and Protocol domains.',
   founder: 'Jeremiah Wong Zhi Qi',
   github: 'https://github.com/auryveth',
   logo: '/assets/logos/Auryveth_Logo_Horizontal_Corporate.svg',
