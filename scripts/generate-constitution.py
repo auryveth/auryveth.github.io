@@ -36,12 +36,19 @@ LAWS = [
 ]
 
 DERIVED = [
-("Quarantine","Compromise or severe integrity failure may trigger governed quarantine. Preserve evidence, fence authority, repair under authorization, and require applicable re-entry acceptance before trust is restored."),
-("Recovery is not resurrection","A restore may continue the same Organism only if permanent death has not been committed, the restored state belongs to the same authenticated lineage, and duplicate active continuity cannot result."),
-("Resource pressure does not authorize silent memory deletion","Under current frozen Organism architecture, physical storage pressure is not permission to delete canonical organism memory. Prefer authorized expansion, approved movement/partitioning, rebuildable-index degradation, safe redundancy compression, and visible restriction/failure."),
-("Migration preserves identity when continuity is valid","Controlled Node migration is continuity-compatible: host migration is not succession and is not replacement. One-authoritative-head fencing remains mandatory."),
-("Stop or quarantine is not death","Runtime stop, suspension, quarantine, task failure, candidate rejection, replacement, descendant success, role supersession, or loss of authority do not by themselves establish permanent Organism death."),
-("Trust remains evidenced","Trusted routine operation need not ask a human every time, but security-sensitive activity must remain reconstructable from appropriate evidence and current authority remains revocable."),
+("D-01 - Quarantine","Material evidence of compromise, severe integrity failure, or unauthorized attack may trigger governed quarantine. Preserve evidence where possible, fence affected authority, repair under authorization, and require applicable acceptance before production trust is restored."),
+("D-02 - Health response","Not all unhealthy states imply attack. Security compromise or memory-integrity failure may require quarantine; latency or low storage may produce degraded or restricted operation; ordinary task failure may require investigation without implying compromise."),
+("D-03 - Emergency resource preemption","Emergency work may preempt lower-priority work only when emergency priority originates from an authorized authority domain or accepted safety rule. An Organism may report an emergency but may not grant its own work emergency priority merely by declaring it."),
+("D-04 - Resource-sacrifice ordering","Under severe resource pressure, preserve human safety and security boundaries first, followed by identity integrity, continuity state, incident/recovery evidence, recovery capacity, critical company operations, normal work, research/background work, discretionary compute, then regenerable caches and temporary data. Storage pressure does not authorize silent deletion of canonical Organism memory."),
+("D-05 - Blackboard authority resilience","A Blackboard may be logically one authority while physically replicated. Failure of one physical instance does not transfer Blackboard authority to a Node or Organism."),
+("D-06 - Recovery is not resurrection","A restore may continue the same Organism only if permanent death has not been committed, the restored state belongs to the same authenticated lineage, and duplicate active continuity cannot result."),
+("D-07 - Production evolution","Fundamental self-change may be proposed by an Organism but is evaluated outside the running production identity. A stable accepted Organism may continue working while a non-authoritative candidate is tested in Research when frozen architecture permits it."),
+("D-08 - Governed population","Organism birth, descendant creation and population growth remain constrained by authorization, purpose, safety and resources. Reproduction does not create automatic resource entitlement or self-issued identity."),
+("D-09 - Trust and evidence","Routine trusted operation need not require repeated human approval, but security-sensitive activity must remain reconstructable from appropriate evidence and current authority remains revocable."),
+("D-10 - Protocol remains subordinate to authority ownership","Protocol may carry identity, authority, quarantine, health, provenance or continuity evidence, but protocol data never creates business, machine, cognitive, lifecycle or governance authority by itself."),
+("D-11 - Hosting migration remains continuity-compatible","Controlled Node migration is same-Organism continuity when single-authority fencing and continuity proof remain valid. Host migration is not succession and is not replacement."),
+("D-12 - Stop, quarantine, replacement and supersession are not death","Runtime stop, suspension, quarantine, task failure, candidate rejection, replacement, descendant success, role supersession or loss of authority do not by themselves establish permanent Organism death."),
+("D-13 - Human/operator authority remains domain-scoped","Authorized humans/operators may exercise authority granted by their role and owning domain. Human status does not fabricate Blackboard business truth, continuity truth, effect authority, death, or Organism authority outside accepted mechanisms."),
 ]
 
 PRECEDENCE = [
@@ -138,7 +145,7 @@ w.heading("Constitutional laws C-01 through C-18", 17)
 for code,title,body in LAWS: w.law(code,title,body)
 
 w.new_page()
-w.heading("Derived ecosystem rules - public constitutional summary", 17)
+w.heading("Derived ecosystem rules D-01 through D-13", 17)
 for title,body in DERIVED:
     w.heading(title, 11.5, 2)
     w.text(body, size=9.1, gap=8)
