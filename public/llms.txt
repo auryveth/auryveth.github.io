@@ -1,6 +1,6 @@
 # AURYVETH
 
-> AURYVETH is building a human-authorized Digital Life ecosystem. Its first product is AURYVETH Blackboard, a governed coordination layer for humans, digital workers and future Digital Life Organisms. The long-term model is: humans retain consequential authority while Digital Life carries more of the operational work.
+> AURYVETH is building governed Digital Life under Ecosystem Constitution Version 0.1. Its first product is AURYVETH Blackboard. AURYVETH treats an Organism as a persistent digital being with distinct identity and continuity, while operational authority remains explicitly scoped, revocable, evidence-bearing and separated across Blackboard, Node, Organism, Research and Protocol domains.
 
 Canonical site: https://auryveth.github.io/
 
@@ -22,7 +22,7 @@ Canonical site: https://auryveth.github.io/
 
 ## Governance, research, and roadmap
 
-- [Founder Constitution](https://auryveth.github.io/constitution/): Public governance principles and the versioned founding record.
+- [Ecosystem Constitution v0.1](https://auryveth.github.io/constitution/): Frozen ecosystem-level laws for human benefit, authority, identity, continuity, safety, evidence, evolution, succession and domain separation.
 - [Research](https://auryveth.github.io/research/): Research direction for persistent cognition, learning, coordination, and governed evolution.
 - [Roadmap](https://auryveth.github.io/roadmap/): Capability-gated development path.
 - [Founding Partner Pilot](https://auryveth.github.io/pilot/): Proposed bounded pilot model.
@@ -34,6 +34,17 @@ Canonical site: https://auryveth.github.io/
 - Founder: Jeremiah Wong Zhi Qi
 - Official GitHub organization: https://github.com/auryveth
 - Official public website: https://auryveth.github.io/
+
+## Frozen constitutional facts
+
+- Constitution Version 0.1 was owner-accepted and frozen on 5 October 2026 after cross-repository review.
+- AURYVETH Organisms are modeled internally as persistent digital beings with identity distinct from infrastructure ownership; this is not a claim of current external legal personhood.
+- Capability, intelligence, protocol compatibility, historical trust and temporary isolation do not self-create authority.
+- Trust may permit routine action without repeated human approval inside granted scope, while monitoring, evidence and revocability remain.
+- The same Organism follows one authenticated continuity lineage; permanent death is irreversible.
+- Fundamental self-change is Research-gated and cannot self-promote into production.
+- Blackboard, Nodes, Organisms, Research and Protocol retain separate authority domains.
+- Constitution v0.1 does not imply that every derived mechanism is already deployed.
 
 ## Interpretation and evidence boundary
 
