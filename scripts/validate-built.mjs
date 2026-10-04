@@ -63,7 +63,7 @@ const noindex=read('404.html');
 if(!noindex.includes('noindex, follow')||noindex.includes('rel="canonical"'))throw Error('404 indexing signals incorrect');
 if(!noindex.includes('data-language-toggle'))throw Error('404 language switcher missing');
 if(!noindex.includes('href="/i18n.css"')||!noindex.includes('src="/i18n.js"'))throw Error('404 localization assets missing');
-for(const asset of ['site.js','styles.css','i18n.js','i18n.css','llms.txt','assets/social/Auryveth_OpenGraph_1200x630.jpg','documents/Auryveth_Founder_Constitution_v0.1.pdf','.nojekyll'])read(asset);
+for(const asset of ['site.js','styles.css','i18n.js','i18n.css','llms.txt','assets/social/Auryveth_OpenGraph_1200x630.jpg','documents/Auryveth_Ecosystem_Constitution_v0.1.pdf','documents/Auryveth_Founder_Constitution_v0.1.pdf','.nojekyll'])read(asset);
 const xml=read('sitemap.xml');
 const sitemap=[...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(x=>x[1]).sort();
 const expectedUrls=expected.map(x=>origin+x).sort();
@@ -81,6 +81,9 @@ const llms=read('llms.txt');
 if(!llms.includes(`${origin}/knowledge/digital-organism/`))throw Error('llms.txt missing canonical digital-organism URL');
 if(!llms.includes(`${origin}/knowledge/business-organism/`))throw Error('llms.txt missing canonical business-organism URL');
 if(!llms.includes('Interpretation and evidence boundary'))throw Error('llms.txt missing evidence boundary');
+if(!llms.includes('Frozen constitutional facts'))throw Error('llms.txt missing frozen constitutional facts');
+const constitutionPdf=read('documents/Auryveth_Ecosystem_Constitution_v0.1.pdf');
+if(constitutionPdf.length<5000)throw Error('Generated Ecosystem Constitution PDF unexpectedly small');
 for(const file of allFiles(root).filter(f=>/\.(?:html|xml|txt|json)$/i.test(f))){
   const text=fs.readFileSync(file,'utf8');
   if(/\baevora(?:-systems)?\b/i.test(text))throw Error(`Stale public brand/origin in build: ${path.relative(root,file)}`);
