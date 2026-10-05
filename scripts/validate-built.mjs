@@ -64,6 +64,11 @@ if(!noindex.includes('noindex, follow')||noindex.includes('rel="canonical"'))thr
 if(!noindex.includes('data-language-toggle'))throw Error('404 language switcher missing');
 if(!noindex.includes('href="/i18n.css"')||!noindex.includes('src="/i18n.js"'))throw Error('404 localization assets missing');
 for(const asset of ['site.js','styles.css','i18n.js','i18n.css','llms.txt','assets/social/Auryveth_OpenGraph_1200x630.jpg','documents/Auryveth_Ecosystem_Constitution_v0.1.pdf','documents/Auryveth_Founder_Constitution_v0.1.pdf','.nojekyll'])read(asset);
+try{
+  new Function(read('i18n.js'));
+}catch(error){
+  throw Error(`Built localization runtime syntax invalid: ${error.message}`);
+}
 const xml=read('sitemap.xml');
 const sitemap=[...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(x=>x[1]).sort();
 const expectedUrls=expected.map(x=>origin+x).sort();
