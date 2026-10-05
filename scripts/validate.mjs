@@ -71,6 +71,11 @@ if(!header.includes('/knowledge/digital-organism/'))throw Error('Navigation miss
 if(!header.includes('data-language-toggle'))throw Error('Navigation missing language switcher');
 
 const i18n=fs.readFileSync('public/i18n.js','utf8');
+try{
+  new Function(i18n);
+}catch(error){
+  throw Error(`Localization runtime syntax invalid: ${error.message}`);
+}
 const translationKeys=new Set(
   [...i18n.matchAll(/^\s{4}"((?:\\.|[^"])*)":\s*"/gm)]
     .map(match=>JSON.parse('"'+match[1]+'"'))
