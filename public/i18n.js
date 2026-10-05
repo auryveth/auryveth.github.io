@@ -1000,7 +1000,7 @@
     "Organism showcase chapters": "生命体展示章节",
     "Illustrative cross-industry business workflow": "跨行业商业工作流示意",
     "Internal validation progression": "内部验证进程",
-    "Conceptual illustration of governed inter-company organism coordination": "受治理的跨公司生命体协作概念示意"
+    "Conceptual illustration of governed inter-company organism coordination": "受治理的跨公司生命体协作概念示意",
 
     /* Ecosystem Constitution v0.1 public synchronization */
     "Ecosystem Constitution": "生态系统宪章",
