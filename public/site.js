@@ -562,6 +562,7 @@ function setMotionEnabled(value, persist=true){
   if(persist){ try { localStorage.setItem('auryveth-motion', motionEnabled ? 'live' : 'reduced'); } catch {} }
   applyMotionClass();
   syncMotionControl();
+  document.dispatchEvent(new Event('auryveth-motion-change'));
   organismScenes.forEach(scene=>scene.setMotion(motionEnabled));
   auryvethStarfield?.setMotion(motionEnabled);
 }
@@ -577,7 +578,7 @@ document.addEventListener('visibilitychange',()=>{
   if(document.hidden) auryvethStarfield?.stop(); else auryvethStarfield?.setMotion(motionEnabled);
 });
 
-// Scroll-driven organism showcase.
+// Time-driven organism showcase.
 // The organism itself remains the existing canvas renderer; the surrounding
 // public-safe explanation moves through four chapters without exposing internals.
 const journey=document.querySelector('[data-organism-journey]');
@@ -666,7 +667,13 @@ if(journey){
   ];
 
   let activeChapter=-1;
-  let queued=false;
+  const durationMs=28000;
+  let elapsedMs=0;
+  let lastFrame=null;
+  let playing=false;
+  let rafId=null;
+  let inView=false;
+
 
   function animateMorph(el){
     if(!el||!motionEnabled||typeof el.animate!=='function') return;
@@ -707,10 +714,7 @@ if(journey){
   }
 
   function syncJourney(){
-    queued=false;
-    const rect=journey.getBoundingClientRect();
-    const travel=Math.max(1,journey.offsetHeight-innerHeight);
-    const p=clamp(-rect.top/travel);
+    const p=motionEnabled ? clamp(elapsedMs/durationMs) : 0;
     scene?.setProgress(p);
     if(bar) bar.style.transform=`scaleX(${p})`;
     if(percent) percent.textContent=`${String(Math.round(p*100)).padStart(2,'0')}%`;
@@ -750,16 +754,48 @@ if(journey){
       el.classList.toggle('is-emphasized',chapterIndex>0 && focus>.58);
     });
 
-    if(scrollHint) scrollHint.textContent=p>.965?'continue below':'scroll to transform';
+    if(scrollHint) scrollHint.textContent=!motionEnabled?'motion paused':p>=1?'sequence complete':'timeline playing';
   }
-  function queueJourney(){
-    if(queued)return;
-    queued=true;
-    requestAnimationFrame(syncJourney);
+  function stopTimeline(){
+    playing=false;
+    lastFrame=null;
+    if(rafId!==null){cancelAnimationFrame(rafId);rafId=null;}
   }
-  window.addEventListener('scroll',queueJourney,{passive:true});
-  window.addEventListener('resize',queueJourney,{passive:true});
+  function timelineFrame(now){
+    rafId=null;
+    if(!playing)return;
+    if(lastFrame!==null)elapsedMs=Math.min(durationMs,elapsedMs+Math.max(0,Math.min(100,now-lastFrame)));
+    lastFrame=now;
+    syncJourney();
+    if(elapsedMs>=durationMs){stopTimeline();return;}
+    rafId=requestAnimationFrame(timelineFrame);
+  }
+  function syncPlayback(){
+    const shouldPlay=inView && !document.hidden && motionEnabled && elapsedMs<durationMs;
+    if(shouldPlay && !playing){playing=true;lastFrame=null;rafId=requestAnimationFrame(timelineFrame);}
+    else if(!shouldPlay && playing)stopTimeline();
+    syncJourney();
+  }
+  if('IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>{
+      inView=entries[0]?.isIntersecting??false;
+      syncPlayback();
+    },{threshold:0.15});
+    observer.observe(journey);
+  }else{
+    const checkViewport=()=>{
+      const rect=journey.getBoundingClientRect();
+      inView=rect.top<innerHeight*.85 && rect.bottom>innerHeight*.15;
+      syncPlayback();
+    };
+    window.addEventListener('scroll',checkViewport,{passive:true});
+    window.addEventListener('resize',checkViewport,{passive:true});
+    checkViewport();
+  }
+  document.addEventListener('visibilitychange',syncPlayback);
+  document.addEventListener('auryveth-motion-change',syncPlayback);
   syncJourney();
+
 }
 
 // Legacy runtime support for inner pages/build variants that still contain it.
