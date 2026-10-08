@@ -868,7 +868,7 @@ body.motion-reduced .journey-topline i{animation-play-state:paused!important}
    AURYVETH v1.0.0 — organism showcase
    Scroll-driven field guide using the existing living organism renderer.
    ========================================================= */
-.organism-showcase{height:680vh}
+.organism-showcase{min-height:100svh}
 .organism-showcase .journey-sticky{
   background:
     radial-gradient(circle at 69% 47%,rgba(30,224,230,.105),transparent 25%),
@@ -1094,7 +1094,7 @@ body.motion-reduced .journey-topline i{animation-play-state:paused!important}
   .journey-callout p{font-size:7.5px}
 }
 @media(max-width:820px){
-  .organism-showcase{height:600vh}
+  .organism-showcase{min-height:100svh}
   .organism-showcase .journey-copy-static{
     left:4px;right:4px;top:auto;bottom:78px;transform:none;
     width:auto;padding-right:0;
@@ -1122,7 +1122,7 @@ body.motion-reduced .journey-topline i{animation-play-state:paused!important}
   .organism-showcase .journey-bottomline>span:first-child{display:none}
 }
 @media(max-width:560px){
-  .organism-showcase{height:560vh}
+  .organism-showcase{min-height:100svh}
   .organism-showcase .journey-copy-static{bottom:70px}
   .organism-showcase .journey-copy-static h2{font-size:clamp(28px,8.8vw,42px)}
   .organism-showcase .journey-copy-static>p{font-size:12px;line-height:1.43}
