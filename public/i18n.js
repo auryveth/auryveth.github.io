@@ -66,6 +66,8 @@
     "The interactive tour illustrates cognition, memory and governance with scripted narration and curated answers. It is an educational interface, not a live organism demonstration.": "互动导览通过预设旁白及精选回答展示认知、记忆与治理。它是教学界面，而非实时数字生命体演示。",
     "Open the interactive tour": "打开互动导览",
 
+    "Explore a scripted visual presentation with animated technical diagrams, a glowing organism and a clear way back to the website. It is not live autonomous cognition.": "探索一段预设脚本的可视化演示，包含动态技术架构图、发光的数字生命体，以及明确的返回网站路径。这并非实时自主认知。",
+    "The interactive tour illustrates cognition, memory and governance with scripted narration and animated technical diagrams. It is an educational interface, not a live organism demonstration.": "互动导览使用预设旁白和动态技术架构图展示认知、记忆与治理。这是教育性界面，而非实时数字生命体演示。",
     /* Global navigation */
     "Home": "首页",
     "Research": "研究",
