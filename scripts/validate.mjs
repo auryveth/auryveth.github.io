@@ -171,7 +171,11 @@ for(const dynamicText of [
   'One organism. A governed life cycle.',
   'Capability grows under explicit authority.',
   'continue below',
-  'scroll to transform'
+  'scroll to transform',
+  'timeline playing',
+  'timeline looping',
+  'motion paused',
+  'Time-driven overview of the Auryveth digital organism, its life cycle and public capability horizon'
 ]){
   if(!translationKeys.has(dynamicText))throw Error(`Missing dynamic Chinese translation: ${dynamicText}`);
 }
