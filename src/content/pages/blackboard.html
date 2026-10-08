@@ -38,6 +38,14 @@
   </div>
 </section>
 
+<section class="section soft" id="public-dataflow"><div class="container">
+ <div class="section-head"><div><span class="eyebrow">Concrete workflow / technical boundaries</span><h2>Example: quote preparation across an interruption</h2></div><p class="lead">This is a proposed system workflow, not an accepted production integration. It makes the intended inputs, decisions, enforcement and outputs explicit without revealing proprietary implementation details.</p></div>
+ <div class="workflow-track">
+ <article class="workflow-step"><span>01</span><small>INPUT</small><strong>Input: request + missing supplier price</strong><p>Blackboard preserves the task, ownership, evidence and pending dependencies.</p></article>
+ <article class="workflow-step"><span>02</span><small>PROPOSAL</small><strong>Preparation: bounded proposal</strong><p>A worker or future Organism proposes the next action using available context; proposed intent is not execution permission.</p></article>
+ <article class="workflow-step"><span>03</span><small>AUTHORITY</small><strong>Enforcement: current authority</strong><p>The owning authority domain determines whether execution is in scope. Denied or stale authority must block the action.</p></article>
+ <article class="workflow-step"><span>04</span><small>EVIDENCE</small><strong>Output: evidence + continuation</strong><p>The result, refusal or unresolved dependency returns to coordination for review and later resumption.</p></article>
+ </div></div></section>
 <section class="section dark">
   <div class="container">
     <div class="thesis-box">
