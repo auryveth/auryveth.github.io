@@ -833,6 +833,10 @@
     "Supports multi-step work within defined guardrails.": "在明确护栏内支持多步骤工作。",
     "continue below": "继续向下",
     "scroll to transform": "滚动以切换视图",
+    "timeline playing": "时间轴播放中",
+    "timeline looping": "时间轴循环播放中",
+    "motion paused": "动画已暂停",
+    "Time-driven overview of the Auryveth digital organism, its life cycle and public capability horizon": "AURYVETH 数字生命体、生命周期与公开能力愿景的自动播放概览",
 
     /* 2026-09-30 Blackboard-first vision refresh */
     "Humans authorize. Digital Life Organisms do the work.": "人类授权，数字生命体执行工作。",
