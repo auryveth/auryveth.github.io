@@ -28,6 +28,17 @@ for(const asset of [
 ]){
  if(!fs.existsSync(asset))throw Error(`Missing ${asset}`);
 }
+// Showcase motion contract: time-driven, viewport-paused and never scroll-scrubbed.
+const showcaseJs=fs.readFileSync('public/site.js','utf8');
+const showcaseCss=fs.readFileSync('public/styles.css','utf8');
+const showcaseHtml=fs.readFileSync('src/content/pages/index.html','utf8');
+for(const marker of ['durationMs=28000','requestAnimationFrame(timelineFrame)','document.addEventListener(\'visibilitychange\',syncPlayback)','document.addEventListener(\'auryveth-motion-change\',syncPlayback)']){
+ if(!showcaseJs.includes(marker))throw Error(`Timed organism showcase missing: ${marker}`);
+}
+if(showcaseJs.includes('window.addEventListener(\'scroll\',queueJourney'))throw Error('Organism showcase still scroll-scrubbed');
+if(!showcaseCss.includes('.organism-journey{position:relative;min-height:100svh;'))throw Error('Organism showcase still forces long scroll');
+if(!showcaseHtml.includes('Time-driven overview of the Auryveth digital organism'))throw Error('Showcase accessibility description is stale');
+
 const src=fs.readFileSync('src/data/site.ts','utf8');
 if(!src.includes('auryveth.github.io'))throw Error('Wrong AURYVETH GitHub Pages origin');
 if(!src.includes("name: 'AURYVETH'"))throw Error('Public brand not switched to AURYVETH');
