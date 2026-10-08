@@ -41,6 +41,8 @@ for(const marker of ['elapsedMs=(elapsedMs+delta)%durationMs;','const shouldPlay
 if(showcaseJs.includes('elapsedMs>=durationMs'))throw Error('Organism timeline still terminates after one cycle');
 if(showcaseJs.includes('window.addEventListener(\'scroll\',queueJourney'))throw Error('Organism showcase still scroll-scrubbed');
 if(!showcaseCss.includes('.organism-journey{position:relative;min-height:100svh;'))throw Error('Organism showcase still forces long scroll');
+if(/\.organism-showcase\s*\{[^}]*height\s*:\s*\d+(?:\.\d+)?vh\b/m.test(showcaseCss))throw Error('Legacy multi-viewport organism showcase height reintroduced');
+if(!showcaseCss.includes('.journey-sticky{position:relative;height:100svh;'))throw Error('Organism showcase panel is no longer in normal page flow');
 if(!showcaseHtml.includes('Time-driven overview of the Auryveth digital organism'))throw Error('Showcase accessibility description is stale');
 
 const src=fs.readFileSync('src/data/site.ts','utf8');
