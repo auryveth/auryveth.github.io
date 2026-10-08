@@ -754,7 +754,7 @@ if(journey){
       el.classList.toggle('is-emphasized',chapterIndex>0 && focus>.58);
     });
 
-    if(scrollHint) scrollHint.textContent=!motionEnabled?'motion paused':p>=1?'sequence complete':'timeline playing';
+    if(scrollHint) scrollHint.textContent=!motionEnabled?'motion paused':'timeline looping';
   }
   function stopTimeline(){
     playing=false;
@@ -764,14 +764,16 @@ if(journey){
   function timelineFrame(now){
     rafId=null;
     if(!playing)return;
-    if(lastFrame!==null)elapsedMs=Math.min(durationMs,elapsedMs+Math.max(0,Math.min(100,now-lastFrame)));
+    if(lastFrame!==null){
+      const delta=Math.max(0,Math.min(100,now-lastFrame));
+      elapsedMs=(elapsedMs+delta)%durationMs;
+    }
     lastFrame=now;
     syncJourney();
-    if(elapsedMs>=durationMs){stopTimeline();return;}
     rafId=requestAnimationFrame(timelineFrame);
   }
   function syncPlayback(){
-    const shouldPlay=inView && !document.hidden && motionEnabled && elapsedMs<durationMs;
+    const shouldPlay=inView && !document.hidden && motionEnabled;
     if(shouldPlay && !playing){playing=true;lastFrame=null;rafId=requestAnimationFrame(timelineFrame);}
     else if(!shouldPlay && playing)stopTimeline();
     syncJourney();
