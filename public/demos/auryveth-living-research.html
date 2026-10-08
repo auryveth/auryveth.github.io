@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#070712"><meta name="robots" content="noindex, follow"><meta name="description" content="AURYVETH Digital Life research — an evidence-conscious, public-safe cinematic technical presentation."><title>AURYVETH — Interactive Public Research Tour</title>
+<style>
+:root{color-scheme:dark;--lime:#b4ff77;--violet:#eab5ff;--white:#ecf9ee;--muted:#9aaab5;--bg:#070712}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}html{min-height:100%}body{overflow:hidden}button{font:inherit;cursor:pointer}button:focus-visible{outline:2px solid var(--lime);outline-offset:3px}button:disabled{opacity:.35;cursor:not-allowed}
+#experience{position:relative;width:100%;height:100dvh;min-height:520px;isolation:isolate;background:radial-gradient(ellipse at 52% 53%,#1c1129 0%,#0a0918 42%,#060713 80%);overflow:hidden}
+#experience:after{position:absolute;content:'';inset:0;z-index:3;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 27%,rgba(0,0,0,.42) 100%),linear-gradient(90deg,rgba(4,6,16,.22),transparent 24%,transparent 76%,rgba(4,6,16,.24))}#experience[data-layout="opening"]:after,#experience[data-layout="closing"]:after{background:radial-gradient(ellipse at 52% 52%,transparent 22%,rgba(0,0,0,.18) 100%)}
+#organismCanvas{display:block;position:absolute;inset:0;width:100%;height:100%;z-index:1;touch-action:none;cursor:grab}#organismCanvas:active{cursor:grabbing}
+#grid{position:absolute;inset:0;z-index:0;opacity:.32;pointer-events:none;background:radial-gradient(circle at 50% 50%,#a5ff78 1px,transparent 1px);background-size:57px 57px;mask-image:radial-gradient(ellipse at center,#000 8%,transparent 76%);animation:grift 28s linear infinite}@keyframes grift{to{transform:translate3d(57px,57px,0)}}
+.glass{position:absolute;z-index:2;pointer-events:none;border:1px solid rgba(183,255,143,.12);border-radius:50%;top:50%;left:50%;height:65vw;width:65vw;max-height:900px;max-width:900px;transform:translate(-50%,-50%);box-shadow:0 0 0 85px rgba(193,116,255,.015),0 0 180px rgba(151,255,130,.014);animation:halo 15s ease-in-out infinite}@keyframes halo{50%{opacity:.42;scale:1.025}}
+#header{position:absolute;z-index:15;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:14px;height:74px;padding:14px clamp(18px,3.9vw,70px);background:linear-gradient(180deg,rgba(5,7,16,.76),transparent)}
+.brand{font-size:15px;font-weight:850;letter-spacing:.28em}.brand span{display:block;font-size:9px;color:#99a6ad;letter-spacing:.14em;margin-top:5px;font-weight:600}.head-tools{display:flex;gap:8px;align-items:center}.micro{font:10px ui-monospace,Consolas,monospace;color:#a3b3bc;letter-spacing:.09em;text-transform:uppercase}.live-dot{display:inline-block;width:6px;height:6px;margin-right:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 11px var(--lime);vertical-align:middle;animation:blip 2s ease-in-out infinite}@keyframes blip{50%{opacity:.3}}
+.chip{border:1px solid rgba(215,255,231,.2);background:rgba(9,14,28,.75);padding:9px 14px;border-radius:99px;color:#d9ebe7;font-size:11px;letter-spacing:.015em}.chip:hover{border-color:rgba(181,255,137,.65);background:rgba(23,31,33,.82)}.chip.mint{background:var(--lime);color:#111b10;border-color:var(--lime);font-weight:800}
+#mainstage{position:absolute;inset:76px 0 87px;z-index:9;pointer-events:none}
+#copy{position:absolute;left:clamp(20px,5vw,86px);top:8%;width:min(39vw,525px);z-index:11;transition:all .85s cubic-bezier(.18,.8,.1,1)}
+#copy h1{font-size:clamp(42px,5.25vw,88px);line-height:.98;letter-spacing:-.067em;margin:14px 0 19px;font-weight:720;max-width:12ch;text-wrap:balance;text-shadow:0 10px 45px rgba(0,0,0,.36)}#copy h1 span{color:var(--lime);text-shadow:0 0 48px rgba(169,255,117,.17)}
+#copy .dek{font-size:clamp(14px,1.3vw,18px);line-height:1.6;max-width:39ch;margin:0;color:#d2dbd7;text-wrap:pretty}#copy .overline{display:flex;align-items:center;gap:12px;color:var(--lime);text-transform:uppercase;font:11px ui-monospace,Consolas,monospace;letter-spacing:.18em}#copy .overline:before{content:'';display:block;width:25px;height:1px;background:currentColor}#experience[data-layout="opening"] #copy,#experience[data-layout="closing"] #copy{width:min(29vw,390px)}#experience[data-layout="opening"] #organismCanvas,#experience[data-layout="closing"] #organismCanvas{z-index:6;filter:saturate(1.1) contrast(1.08) brightness(1.08)}#experience[data-layout="opening"] #grid,#experience[data-layout="closing"] #grid{opacity:.12}#experience[data-layout="opening"] .glass,#experience[data-layout="closing"] .glass{opacity:.18;box-shadow:0 0 0 34px rgba(193,116,255,.01),0 0 110px rgba(151,255,130,.01)}#experience[data-layout="opening"] #copy,#experience[data-layout="closing"] #copy{top:10%}#experience[data-layout="technical"] #organismCanvas{mask-image:linear-gradient(to right,#000 0%,#000 42%,rgba(0,0,0,.35) 53%,transparent 62%)}#experience[data-layout="technical"] #copy{top:4.5%;width:min(38vw,505px)}#experience[data-layout="technical"] #copy h1{font-size:clamp(30px,3.35vw,55px);line-height:1.03;max-width:13ch}#experience[data-layout="technical"] #copy .dek{font-size:clamp(12px,1vw,15px);max-width:37ch}
+#visual{position:absolute;right:3.6%;top:8%;width:49%;height:79%;z-index:12;opacity:1;transition:opacity .5s,transform .8s;transform:translate(0,0);pointer-events:none;border:1px solid rgba(210,250,215,.08);border-radius:28px;background:linear-gradient(180deg,rgba(12,18,28,.18),rgba(12,18,28,.08));box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 20px 60px rgba(0,0,0,.18);backdrop-filter:blur(4px)}#visual:before{content:'';position:absolute;inset:14px;border-radius:22px;border:1px solid rgba(210,250,215,.04);pointer-events:none}#visual.is-empty{display:none!important;visibility:hidden!important;opacity:0!important;transform:none!important;backdrop-filter:none!important;box-shadow:none!important;background:none!important;border:0!important}#experience[data-layout="opening"] #visual,#experience[data-layout="closing"] #visual{display:none!important;visibility:hidden!important;backdrop-filter:none!important}
+#diagram{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 26px rgba(97,255,179,.05));}
+#diagram .wire{fill:none;stroke:rgba(170,253,188,.22);stroke-width:1.35;stroke-dasharray:3 8;animation:wires 18s linear infinite}#diagram .wire-solid{fill:none;stroke:rgba(169,255,122,.28);stroke-width:1.15}#diagram .wire-bright{fill:none;stroke:rgba(169,255,122,.62);stroke-width:1.75;stroke-dasharray:8 10;animation:wires 11s linear infinite}#diagram .w-purple{stroke:rgba(244,159,254,.56)}@keyframes wires{to{stroke-dashoffset:-170}}
+#diagram .orbit{fill:none;stroke:rgba(166,255,134,.10);stroke-width:1}#diagram .nucleus{fill:url(#nodeGreen);filter:url(#neon)}#diagram .violet{fill:url(#nodePurple);filter:url(#neon)}#diagram .circle{fill:rgba(8,13,24,.72);stroke:rgba(171,255,133,.38);stroke-width:1.2}#diagram .purple-circle{fill:rgba(18,13,31,.72);stroke:rgba(245,171,255,.42);stroke-width:1.15}#diagram .halo-node{fill:none;stroke:rgba(185,255,145,.08);stroke-width:12}#diagram .subring{fill:none;stroke:rgba(233,255,239,.08);stroke-width:1}#diagram .node-fill-green{fill:url(#discGreen)}#diagram .node-fill-purple{fill:url(#discPurple)}
+#diagram text{font-family:Inter,ui-sans-serif,system-ui,sans-serif;pointer-events:none}#diagram .small{font-size:11px;letter-spacing:.16em;fill:#8fa8af}#diagram .label{font-size:16px;font-weight:630;fill:#f0fff3}#diagram .hero{font-size:26px;font-weight:690;fill:#edffdb;letter-spacing:-.025em}#diagram .tiny{font-size:9.6px;letter-spacing:.15em;fill:#8ea2ac}
+#diagram .part{opacity:.6;transition:opacity .6s ease,filter .6s ease}#diagram .part.active{opacity:1;filter:drop-shadow(0 0 10px rgba(174,255,138,.13))}#diagram .part .activehalo{opacity:0;transition:opacity .6s ease}#diagram .part.active .activehalo{opacity:.72}
+#diagram .particle{fill:#d8ffd7;filter:url(#neon)}#diagram .wave{fill:none;stroke:#b4ff77;stroke-width:1.35;opacity:.62;stroke-linecap:round}#diagram .signature{font:10px ui-monospace,monospace;letter-spacing:.14em;fill:#b2bec7}#visual.diagram-enter{animation:panelBloom .85s cubic-bezier(.17,.82,.12,1) both}#visual.diagram-enter #diagram .part,#visual.diagram-enter #diagram text,#visual.diagram-enter #diagram .signature,#visual.diagram-enter #diagram .orbit,#visual.diagram-enter #diagram .wave{opacity:0;transform-box:fill-box;transform-origin:center;animation:diagramFade .9s cubic-bezier(.18,.8,.1,1) forwards;animation-delay:var(--d,0ms)}#visual.diagram-enter #diagram .wire,#visual.diagram-enter #diagram .wire-bright,#visual.diagram-enter #diagram .wire-solid{opacity:0;animation:wireReveal 1.25s cubic-bezier(.18,.8,.1,1) forwards;animation-delay:var(--d,0ms)}@keyframes panelBloom{from{opacity:.35;transform:translateY(10px) scale(.986)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes diagramFade{from{opacity:0;filter:blur(8px);transform:translateY(10px) scale(.97)}to{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}}@keyframes wireReveal{from{opacity:0;stroke-dashoffset:52;filter:blur(2px)}to{opacity:1;stroke-dashoffset:0;filter:blur(0)}}
+#caption{position:absolute;bottom:2.9%;left:clamp(20px,5vw,86px);width:min(79%,950px);z-index:14;display:flex;align-items:flex-end;gap:15px;pointer-events:none}#caption:before{content:'';position:absolute;left:-10px;top:-42px;width:165px;height:72px;background:radial-gradient(ellipse at left bottom,rgba(180,255,119,.16),rgba(180,255,119,0) 70%);filter:blur(14px);opacity:.0;transition:opacity .25s}#caption.talking:before{opacity:1}
+#speakerLine{width:2px;height:43px;background:linear-gradient(180deg,transparent,var(--lime),transparent);box-shadow:0 0 14px var(--lime);flex-shrink:0;transform-origin:center;transition:scale .15s}#caption.talking #speakerLine{animation:talk 1.0s ease-in-out infinite}@keyframes talk{25%{scale:1 1.5}75%{scale:1 .52}}
+#spoken{font-size:clamp(17px,1.9vw,27px);line-height:1.26;letter-spacing:-.025em;font-weight:510;text-shadow:0 5px 18px #03040b,0 0 28px #03040b;margin:0;max-width:53ch;text-wrap:balance}
+#caption small{display:block;color:var(--lime);font:10px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.15em;margin-bottom:8px}
+#footer{position:absolute;left:0;bottom:0;right:0;z-index:16;height:86px;padding:12px clamp(18px,3.9vw,70px);display:grid;grid-template-columns:175px 1fr auto;align-items:center;gap:22px;background:linear-gradient(0deg,rgba(4,7,17,.95),rgba(4,7,17,.56));border-top:1px solid rgba(210,250,215,.1);backdrop-filter:blur(10px)}
+#counter strong{display:block;font:27px ui-monospace,Consolas,monospace;color:#defcb7;letter-spacing:-.09em;font-weight:500}#counter small{display:block;font-size:10px;color:#8da4a9;margin-top:2px;letter-spacing:.04em}
+#chapters{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:7px;align-items:start;height:100%}.track{background:transparent;border:0;min-width:0;text-align:left;padding:0;color:#9caaaf;position:relative}.track .bar{height:3px;display:block;background:rgba(213,246,216,.13);border-radius:10px;overflow:hidden}.track .bar b{display:block;width:0%;height:100%;background:var(--lime);box-shadow:0 0 13px var(--lime);transition:width .25s}.track.visited .bar b{width:100%}.track.active .bar b{width:var(--progress,0%)}.track small{display:block;font-size:10px;letter-spacing:.02em;margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#91a2a4}.track.active small{color:#edffed}.track:hover small{color:var(--lime)}
+#transport{display:flex;gap:8px;align-items:center}#transport button{width:39px;height:39px;border:1px solid rgba(217,255,217,.25);border-radius:50%;background:rgba(20,26,37,.55);color:#ddefdd;font-size:18px}#transport button:hover{border-color:var(--lime)}#transport .primary{background:var(--lime);border-color:var(--lime);color:#192317}
+#disclaimer{position:absolute;right:clamp(20px,5vw,86px);top:96px;z-index:14;color:#859da5;font:9px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.1em;pointer-events:none;text-align:right}
+#opening{position:absolute;inset:0;z-index:40;background:radial-gradient(ellipse at 65% 55%,rgba(40,22,56,.68),rgba(5,7,17,.97) 73%);display:grid;place-items:center;transition:opacity .9s,visibility .9s}#opening.closed{opacity:0;visibility:hidden;pointer-events:none}#opening .hero-box{max-width:710px;padding:35px;text-align:center}#opening .tiny{font:11px ui-monospace,monospace;letter-spacing:.24em;color:var(--lime)}#opening h2{font-size:clamp(45px,6.5vw,94px);font-weight:650;letter-spacing:-.075em;line-height:.98;margin:24px 0}#opening h2 span{color:var(--lime)}#opening p{color:#b9c9c5;font-size:clamp(15px,1.5vw,19px);line-height:1.65;max-width:47ch;margin:0 auto 27px}#opening .launch{border:0;color:#10200b;background:var(--lime);padding:16px 30px;border-radius:999px;font-size:14px;font-weight:800;box-shadow:0 12px 50px rgba(177,255,112,.15)}#opening .launch:hover{background:#d1ffaf}#opening .skip{display:block;background:none;border:0;color:#adc0b8;margin:17px auto;font-size:12px}#opening .sub{font:11px ui-monospace,monospace;color:#91a4ae;letter-spacing:.06em}
+#keys{position:absolute;left:clamp(20px,3.9vw,70px);top:84px;z-index:17;font:9px ui-monospace,monospace;letter-spacing:.07em;color:#8297a3;pointer-events:none}
+#notes{position:absolute;z-index:25;right:22px;top:82px;width:min(390px,85vw);max-height:70vh;overflow:auto;padding:23px 24px;background:rgba(7,11,22,.97);border:1px solid rgba(192,247,197,.22);border-radius:16px;box-shadow:0 20px 75px rgba(0,0,0,.5);display:none}#notes.open{display:block}#notes h3{font-size:16px;margin:0 0 12px}#notes p{font-size:13px;color:#c0ced0;line-height:1.6}#notes small{color:#98cba4;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+#experience.reveal #copy,#experience.reveal #visual:not(.is-empty){animation:rise .75s ease both}@keyframes rise{from{opacity:0;translate:0 22px}to{opacity:1;translate:0 0}}
+@media(max-width:1150px){#footer{grid-template-columns:120px 1fr auto;gap:15px}#visual{right:2%;width:51%}#copy{left:4%}#caption{left:4%}#copy h1{font-size:clamp(36px,4.7vw,66px)}}
+@media(max-width:800px){body{overflow:auto}#experience{height:auto;min-height:980px;overflow:hidden}#organismCanvas{height:980px}#header{height:63px;padding:12px 18px}.brand{font-size:12px}.brand span{font-size:8px}#header .micro{display:none}.chip{font-size:10px;padding:8px 10px}#mainstage{position:relative;inset:auto;min-height:825px;margin-top:64px;padding-bottom:35px}#copy,#experience[data-layout="technical"] #copy{position:relative;top:auto;left:18px;width:calc(100% - 36px);max-width:660px;padding-top:12px}#copy h1,#experience[data-layout="technical"] #copy h1{font-size:clamp(33px,8vw,52px);max-width:16ch;margin:10px 0}#copy .dek,#experience[data-layout="technical"] #copy .dek{font-size:13px;line-height:1.45;max-width:49ch}#experience[data-layout="technical"] #organismCanvas{mask-image:none}#visual{top:385px;left:3%;right:3%;width:94%;height:330px}#caption{left:20px;bottom:40px;width:90%}#spoken{font-size:clamp(15px,4.1vw,21px)}#footer{position:sticky;height:68px;bottom:0;padding:9px 14px;grid-template-columns:46px 1fr auto;gap:13px}#counter strong{font-size:17px}#counter small{display:none}#chapters{gap:3px}.track small{display:none}#transport button{width:33px;height:33px;font-size:15px}#disclaimer{display:none}#keys{display:none}#opening .hero-box{padding:25px 22px}#opening h2{font-size:49px}#opening{position:fixed}#notes{position:fixed;z-index:60;top:70px}}
+@media(max-width:480px){#visual{top:405px;height:310px}#mainstage{min-height:805px}#experience{min-height:965px}#organismCanvas{height:965px}#caption{bottom:27px}#spoken{font-size:15px;line-height:1.21}#copy h1,#experience[data-layout="technical"] #copy h1{font-size:35px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}#diagram .wire-bright,#diagram .wire{stroke-dasharray:none}}
+
+/* Technical exhibits: public interface semantics, not private implementation diagrams. */
+#diagram .technical-heading{font-size:19px;font-weight:750;letter-spacing:-.035em;fill:#efffeb}
+#diagram .technical-sub{font-size:11px;letter-spacing:.02em;fill:#a5b8c0}
+#diagram .technical-pill{fill:rgba(180,255,119,.045);stroke:rgba(180,255,119,.30);stroke-width:1}
+#diagram .technical-pill-text{font-size:9.2px;letter-spacing:.095em;fill:#c2f9ac}
+#diagram .technical-rule{stroke:rgba(224,255,238,.15);stroke-width:1}
+#diagram .technical-kicker{font-size:10.4px;fill:#a9bebc;font-weight:700;letter-spacing:.14em}
+#diagram .technical-box{fill:rgba(9,20,30,.82);stroke:rgba(173,246,202,.30);stroke-width:1.3}
+#diagram .technical-accent{fill:#b4ff77;opacity:.77}
+#diagram .technical-part.violet .technical-box{fill:rgba(24,15,38,.85);stroke:rgba(234,181,255,.46)}
+#diagram .technical-part.violet .technical-accent{fill:#eab5ff}
+#diagram .technical-label{font-size:14.2px;font-weight:720;fill:#eaf7f2;letter-spacing:-.016em}
+#diagram .technical-detail{font-size:11.3px;fill:#afc3c8;letter-spacing:0}
+#diagram .technical-mini{fill:rgba(180,255,119,.064);stroke:rgba(180,255,119,.32);stroke-width:1}
+#diagram .technical-part.violet .technical-mini{fill:rgba(234,181,255,.065);stroke:rgba(234,181,255,.36)}
+#diagram .technical-mini-text{font-size:10.4px;letter-spacing:.09em;font-weight:670;fill:#d1f3c6}
+#diagram .technical-part.violet .technical-mini-text{fill:#f0d4ff}
+#diagram .technical-route{fill:none;stroke:#b4ff77;stroke-opacity:.70;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+#diagram .technical-part.violet .technical-route{stroke:#eab5ff;stroke-opacity:.78}
+#diagram .technical-route.dashed{stroke-dasharray:4 5}
+#diagram .technical-route-label{font-size:9.7px;letter-spacing:.09em;font-weight:700;fill:#d1edc9}
+#diagram .technical-footer{fill:rgba(181,255,131,.057);stroke:rgba(180,255,119,.23);stroke-width:1}
+#diagram .technical-footer.purple{fill:rgba(234,181,255,.05);stroke:rgba(234,181,255,.25)}
+#diagram .technical-foot-text{font-size:10.1px;letter-spacing:.115em;font-weight:630;fill:#bde7ba}
+#diagram .technical-part{opacity:.67;transition:opacity .4s ease,filter .4s ease}
+#diagram .technical-part.active{opacity:1;filter:drop-shadow(0 0 9px rgba(180,255,119,.09))}
+#visual.diagram-enter #diagram .technical-head,#visual.diagram-enter #diagram .technical-foot{animation:diagramFade .7s ease both}
+#visual.diagram-enter #diagram .technical-part{animation:diagramFade .74s cubic-bezier(.18,.8,.1,1) both;animation-delay:var(--d,0ms)}
+#diagram .technical-part .technical-box{transition:stroke .4s ease}
+#diagram .technical-part.active .technical-box{stroke:rgba(205,255,192,.75)}
+#diagram .technical-part.violet.active .technical-box{stroke:rgba(245,204,255,.85)}
+@media (prefers-reduced-motion: reduce){#visual.diagram-enter #diagram .technical-part,#visual.diagram-enter #diagram .technical-head,#visual.diagram-enter #diagram .technical-foot,#visual.diagram-enter #diagram text,#visual.diagram-enter #diagram .part,#visual.diagram-enter #diagram .wire,#visual.diagram-enter #diagram .wire-bright,#visual.diagram-enter #diagram .wire-solid,#visual.diagram-enter #diagram .wave,#visual.diagram-enter #diagram .orbit,#visual.diagram-enter #diagram .signature{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}}
+
+/* Curated public Q&A. Browser voice recognition may use an external speech provider; no AURYVETH question upload. */
+#questionDock{position:absolute;z-index:18;top:50%;left:clamp(22px,5vw,86px);transform:translateY(-46%);width:min(515px,43vw);max-height:70%;overflow:auto;padding:27px 30px;border:1px solid rgba(181,255,137,.2);border-radius:26px;background:linear-gradient(148deg,rgba(8,16,25,.94),rgba(13,12,29,.88));box-shadow:0 14px 55px rgba(0,0,0,.32),inset 0 1px 0 rgba(207,255,202,.07);backdrop-filter:blur(12px)}
+#questionDock[hidden]{display:none!important}#questionDock .qkicker{font-size:10px;letter-spacing:.23em;text-transform:uppercase;color:var(--lime);margin-bottom:10px}#questionDock h2{font-size:clamp(30px,3.1vw,48px);line-height:1.05;letter-spacing:-.06em;margin:0 0 12px;font-weight:650}#questionDock h2 span{color:var(--lime)}#questionDock .qdesc{font-size:14px;line-height:1.6;color:#c7d8d3;margin:0 0 18px}#questionDock form{display:flex;align-items:stretch;gap:8px}#questionText{width:100%;min-width:0;flex:1;outline:none;color:#f0f9f1;background:rgba(5,9,17,.87);border:1px solid rgba(179,255,139,.3);border-radius:12px;padding:12px 13px;font-size:13px}#questionText::placeholder{color:#819a95}#questionText:focus{border-color:var(--lime);box-shadow:0 0 0 3px rgba(181,255,137,.08)}#questionDock form button{flex:none;background:var(--lime);color:#15230d;border:0;border-radius:12px;padding:0 18px;font-weight:750;font-size:13px}#questionDock form button:hover{background:#d3ffb4}#questionDock .qsuggest-label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#9baea9;margin:18px 0 9px}#questionChips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}#questionChips button{border:1px solid rgba(176,242,177,.22);color:#dcf1e6;background:rgba(18,31,33,.45);padding:9px 11px;border-radius:12px;font-size:11px;line-height:1.3;text-align:left}#questionChips button:hover,#questionChips button:focus-visible{border-color:var(--lime);color:var(--lime)}#questionStatus{min-height:19px;color:#f3c8ff;font-size:12px;line-height:1.4;margin:12px 0 0}#questionDock .qdisclaimer{font-size:10px;color:#91aaa4;line-height:1.5;margin:13px 0 0}#questionDock .qmic{display:flex;align-items:center;gap:12px;margin:0 0 15px;flex-wrap:wrap}#micBtn{border:1px solid rgba(188,255,169,.52);border-radius:13px;background:rgba(20,40,31,.78);color:#eaffd9;padding:11px 15px;font-weight:650;display:inline-flex;align-items:center;gap:9px;font-size:13px;white-space:nowrap}#micBtn:hover:not(:disabled),#micBtn:focus-visible{border-color:var(--lime);background:rgba(37,72,40,.92)}#micBtn:disabled{opacity:.55;cursor:not-allowed}#micBtn[aria-pressed="true"]{background:rgba(98,33,75,.86);color:#ffddf5;border-color:#ffaddb;box-shadow:0 0 22px rgba(255,125,204,.18)}#micBtn[aria-pressed="true"] span{animation:micBeat 1.1s ease-in-out infinite}@keyframes micBeat{50%{opacity:.35;transform:scale(1.4)}}#micHint{font-size:11px;color:#9db7ac;line-height:1.35;flex:1;min-width:140px}#experience[data-layout="question"].mic-listening #questionDock{border-color:rgba(242,160,255,.55)}#experience[data-layout="question"].mic-listening #organismCanvas{filter:brightness(1.17) saturate(1.22)}
+#qReturn{position:absolute;right:clamp(20px,4vw,60px);bottom:21%;z-index:19;border:1px solid rgba(181,255,137,.46);background:rgba(6,15,21,.87);color:var(--lime);padding:10px 16px;border-radius:99px;box-shadow:0 8px 30px rgba(0,0,0,.3);font-size:12px}#qReturn[hidden]{display:none!important}#qReturn:hover{background:rgba(18,34,28,.95)}#qaBtn{border-color:rgba(181,255,137,.34)}#experience[data-layout="question"] #visual{display:none!important;backdrop-filter:none!important}#experience[data-layout="question"] #copy{display:none!important}#experience[data-layout="question"] #organismCanvas{z-index:6;mask-image:none!important;filter:brightness(1.07) saturate(1.12)}#experience[data-layout="question"]:after{background:radial-gradient(ellipse at 52% 52%,transparent 25%,rgba(0,0,0,.19) 100%)}#experience[data-layout="question"] #disclaimer{opacity:.8}#experience[data-layout="question"] #caption{display:none}#experience[data-layout="qa-answer"] #copy{top:6%}#experience[data-layout="qa-answer"] #organismCanvas{mask-image:linear-gradient(to right,#000 0%,#000 40%,rgba(0,0,0,.24) 52%,transparent 61%)}
+@media(max-width:850px){#experience[data-layout="question"]{height:100dvh;min-height:620px;overflow:hidden}#experience[data-layout="question"] #mainstage{display:none}#experience[data-layout="question"] #organismCanvas{height:100%}#experience[data-layout="question"] #footer{position:absolute;bottom:0;left:0;right:0;z-index:20}#questionDock{top:auto;bottom:83px;left:4%;right:4%;width:auto;max-height:calc(100% - 196px);transform:none;padding:18px 20px}#questionDock h2{font-size:30px}#questionDock .qdesc{font-size:12px;margin-bottom:10px}#questionDock .qsuggest-label{margin-top:10px}#questionChips{gap:5px}#questionChips button{font-size:10px;padding:7px 8px}#qReturn{bottom:102px;right:15px}#experience[data-layout="qa-answer"] #copy{top:5%}}
+@media(max-height:675px){#questionDock{max-height:calc(100% - 175px);padding:16px 20px}#questionDock h2{font-size:32px}}@media(max-width:480px){#questionDock .qmic{gap:7px;margin-bottom:9px}#micBtn{font-size:11px;padding:8px 11px}#micHint{font-size:10px}#questionDock .qdisclaimer{font-size:9px;margin-top:8px}}
+@media(max-width:480px){#experience[data-layout="question"] #header #autoBtn,#experience[data-layout="question"] #header #notesBtn,#experience[data-layout="question"] #header #fullBtn{display:none}#experience[data-layout="question"] #header{flex-wrap:nowrap}#experience[data-layout="question"] #header .head-tools{gap:5px}}@media(prefers-reduced-motion:reduce){#questionDock{transition:none;backdrop-filter:none}}
+</style></head><body>
+<div id="experience" data-layout="opening">
+<div id="grid"></div><div class="glass"></div>
+<canvas id="organismCanvas" role="img" aria-label="AURYVETH V2.4 alien neural organism, visual metaphor with glowing living nucleus and connecting synapses"></canvas>
+<button id="enginePause" hidden></button><button id="engineReset" hidden></button>
+<header id="header"><div class="brand">AURYVETH<span>RESEARCH / DIGITAL LIFE</span></div><div class="head-tools"><span class="micro"><i class="live-dot"></i>PUBLIC SCIENTIFIC VISUALIZATION</span><button class="chip" id="voiceBtn" type="button">Voice: on</button><button class="chip" id="autoBtn" type="button">Autoplay: on</button><button class="chip" id="ambientBtn" type="button">Ambient: on</button><button class="chip" id="qaBtn" type="button">Questions</button><button class="chip" id="notesBtn" type="button" aria-expanded="false">Notes</button><button class="chip" id="fullBtn" type="button">Full screen</button></div></header>
+<div id="keys">← / → CHAPTER · SPACE PAUSE · V VOICE · A AMBIENT · M MICROPHONE IN Q&A · F FULL SCREEN</div>
+<section id="mainstage" aria-live="off"><div id="copy"><div class="overline" id="sceneLabel">INTRODUCTION</div><h1 id="sceneTitle">A living question.</h1><p id="sceneDek" class="dek"></p></div>
+<div id="visual" class="is-empty" hidden><svg id="diagram" viewBox="0 0 650 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Public conceptual architecture diagram"></svg></div>
+<div id="caption" role="status" aria-live="polite" aria-atomic="true"><div id="speakerLine"></div><div><small id="speakerId">VISUAL GUIDE / SCRIPTED NARRATION</small><p id="spoken"></p></div></div></section>
+<div id="disclaimer">PUBLIC-SAFE / ARCHITECTURAL ABSTRACTION · NOT A LIVE COGNITION DEMO</div>
+<footer id="footer"><div id="counter"><strong id="chapterCount">01 / 10</strong><small id="chapterName">Introduction</small></div><div id="chapters" role="group" aria-label="Presentation chapters"></div><div id="transport"><button id="prevBtn" aria-label="Previous chapter">‹</button><button id="pauseBtn" aria-label="Pause or resume">Ⅱ</button><button class="primary" id="nextBtn" aria-label="Next chapter">›</button></div></footer>
+
+<section id="questionDock" aria-label="Professor question mode" hidden>
+  <div class="qkicker">LIVE AUDIENCE SESSION / CURATED ANSWER PATHS</div>
+  <h2>I'm here for <span>your questions.</span></h2>
+  <p class="qdesc">Ask about the hypothesis, the evidence, cognition, continuity or human authority. I'll open a short visual explanation, then return here for the next question.</p>
+  <div class="qmic" role="group" aria-label="Voice question controls"><button id="micBtn" type="button" aria-pressed="false"><span aria-hidden="true">◉</span> Ask by voice</button><span id="micHint">Press to listen, then confirm the transcription.</span></div><p class="mic-privacy" style="font-size:11px;line-height:1.4;opacity:.75;margin:8px 0 12px">Voice transcription may be processed by your browser provider. Do not share confidential information. Typed questions stay on this page.</p>
+  <form id="questionForm" autocomplete="off"><input id="questionText" type="text" maxlength="300" aria-label="Visitor question" placeholder="Ask by voice, or type a question…" required/><button id="exploreBtn" type="submit">Explore →</button></form>
+  <p id="questionStatus" aria-live="polite"></p>
+  <div class="qsuggest-label">Suggested questions</div><div id="questionChips"></div>
+  <p class="qdisclaimer">Prepared answers only—not live Organism cognition. Typed questions are handled locally and are not stored. Microphone recognition is provided by your browser and may use its online speech service; voice audio/transcripts may be processed by that provider. Microphone access starts only when you press “Ask by voice”.</p>
+</section>
+<button id="qReturn" type="button" hidden>← Back to questions</button>
+<div id="notes" aria-label="Presenter notes"><small>PUBLIC DISCLOSURE BOUNDARY</small><h3 id="noteTitle"></h3><p id="noteBody"></p><small>Do not disclose private topology, training recipes, source contracts, security controls, internal parameters or unreleased results.</small></div>
+<div id="opening"><div class="hero-box"><div class="tiny">AURYVETH / RESEARCH PRESENTATION</div><h2>What if digital life<br>could <span>continue?</span></h2><p>A visual organism introduces the research question, a deeper public scientific framing of cognition and memory, the public ecosystem architecture, and the evidence required before autonomy can be trusted.</p><button class="launch" id="beginBtn">Begin with narration →</button><button class="skip" id="silentBtn">Begin without voice</button><div class="sub">Conceptual presenter · No private internals · Subtle ambient audio · About 5 minutes</div></div></div>
+</div>
+<script>window.AuryvethStage={x:.67,y:.52,zoom:1,energy:0,front:0};window.__livingX=500;window.__livingY=400;</script>
+<script>(()=>{'use strict';
+const canvas=document.getElementById('organismCanvas'),c=canvas.getContext('2d',{alpha:true});if(!c)return;
+const MODE='alien', TAU=Math.PI*2, C1='#b4ff77',C2='#f399ff';
+let w=1,h=1,dpr=1,t=0,last=0,paused=matchMedia('(prefers-reduced-motion:reduce)').matches,drag=false,rot=.43,tilt=-.19,tr=.43,tp=-.19,px=0,py=0;
+const btn=document.getElementById('enginePause');function pause(v){paused=v;btn.textContent=v?'Play':'Pause';btn.setAttribute('aria-pressed',String(v))}pause(paused);btn.onclick=()=>pause(!paused);document.getElementById('engineReset').onclick=()=>{tr=.43;tp=-.19};
+const clamp=(n,a,b)=>Math.min(b,Math.max(a,n));let seed=MODE==='bio'?24194:MODE==='synthetic'?99817:7731;
+const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296};
+function rgba(hex,a){const n=parseInt(hex.slice(1),16);return `rgba(${n>>16},${n>>8&255},${n&255},${clamp(a,0,1)})`}
+function dot(x,y,r,col){c.fillStyle=col;c.beginPath();c.arc(x,y,Math.max(.1,r),0,TAU);c.fill()}
+function line(a,b,col,width=1){c.strokeStyle=col;c.lineWidth=width;c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke()}
+const nodes=[],edges=[],pulses=[],strands=[];const GOLDEN=Math.PI*(3-Math.sqrt(5));
+function create(){
+ const N=MODE==='bio'?470:MODE==='synthetic'?290:380;
+ for(let i=0;i<N;i++){
+  const y=1-2*(i+.5)/N,a=i*GOLDEN,r=Math.sqrt(1-y*y);let x=Math.cos(a)*r,z=Math.sin(a)*r,Y=y;
+  let phase=rand()*TAU,layer=MODE==='bio'?(i%7===0?.58:i%13===0?.34:1):(i%5===0?.61:1);
+  if(MODE==='bio'){
+    // Two lobes and a winding cortical surface, intentionally irregular rather than a sphere.
+    const side=x<0?-1:1; x=x*.78+side*.17;Y=Y*.79+.07*Math.sin(a*4);z=z*.82;
+    const fold=1+.09*Math.sin(12*a+8*y)+.043*Math.cos(19*a-11*y);x*=fold;Y*=fold;z*=fold;
+  }else if(MODE==='synthetic'){
+    // Layered polyhedral rings, with sparse high-importance cognition hubs.
+    let ring=Math.round((Y+1)*6)/6-1;Y=Y*.40+ring*.60;x*=.98;z*=.98;
+    if(i%11===0)layer=.30;
+  }else{
+    // Twisted, three-lobed topology with cavities and non-uniform radius.
+    const ang=Math.atan2(z,x),f=1+.27*Math.sin(3*ang+2.8*Y)+.18*Math.cos(5*Y-2*ang);x*=f;z*=f;
+    const twist=Y*1.8+.36*Math.sin(5*Y);const xx=x*Math.cos(twist)-z*Math.sin(twist);z=x*Math.sin(twist)+z*Math.cos(twist);x=xx;
+    Y=Y*.88+.11*Math.sin(3*ang);
+    if(i%9===0)layer=.42;
+  }
+  nodes.push({x:x*layer,y:Y*layer,z:z*layer,phase,layer,size:1+rand()*1.4,group:i%7});
+ }
+ const reach=MODE==='bio'?.135:MODE==='synthetic'?.205:.21;
+ for(let i=0;i<nodes.length;i++){
+  const near=[];for(let j=0;j<nodes.length;j++){if(i===j)continue;const a=nodes[i],b=nodes[j],d=(a.x-b.x)**2+(a.y-b.y)**2+(a.z-b.z)**2;if(d<reach)near.push([d,j])}
+  near.sort((a,b)=>a[0]-b[0]);let count=MODE==='bio'?3:MODE==='synthetic'?4:3;
+  for(const [,j]of near.slice(0,count)){if(j>i)edges.push({a:i,b:j,p:rand(),s:.4+rand()*.6})}
+ }
+ if(!edges.length)throw Error('Topology failed');
+ for(let i=0;i<(MODE==='bio'?100:MODE==='synthetic'?85:72);i++)pulses.push({edge:Math.floor(rand()*edges.length),phase:rand(),speed:.05+rand()*.18,size:1+rand()*1.5});
+ for(let i=0;i<24;i++)strands.push({phase:rand()*TAU,band:rand(),direction:rand()>.5?1:-1});
+}create();
+function resize(){const r=canvas.getBoundingClientRect();w=r.width;h=r.height;window.__livingX=w*.67;window.__livingY=h*.51;dpr=Math.min(devicePixelRatio||1,1.6);canvas.width=Math.max(1,Math.round(w*dpr));canvas.height=Math.max(1,Math.round(h*dpr));c.setTransform(dpr,0,0,dpr,0,0);draw()}addEventListener('resize',resize);
+canvas.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener('pointermove',e=>{if(drag){tr+=(e.clientX-px)*.007;tp=clamp(tp+(e.clientY-py)*.005,-1.2,1.2);px=e.clientX;py=e.clientY}});
+canvas.addEventListener('pointerup',()=>drag=false);canvas.addEventListener('pointercancel',()=>drag=false);
+function project(x,y,z){let ca=Math.cos(rot),sa=Math.sin(rot),cp=Math.cos(tilt),sp=Math.sin(tilt),xx=x*ca+z*sa,zz=z*ca-x*sa,yy=y*cp-zz*sp,depth=y*sp+zz*cp,p=3.4/(3.4-depth*.6);return{x:xx*p,y:yy*p,z:depth,s:p}}
+function draw(){if(w<2||h<2)return;c.clearRect(0,0,w,h);const host=window.AuryvethStage||{},mobile=w<820;const targetX=(mobile?.50:(host.x??.26))*w,targetY=(mobile?.32:(host.y??.54))*h;window.__livingX+=(targetX-window.__livingX)*.06;window.__livingY+=(targetY-window.__livingY)*.06;const presentLift=Math.max(0,Math.min(1,host.front||0));const cx=window.__livingX,cy=window.__livingY,scale=Math.min(w*(mobile?.46:.32),h*(mobile?.27:.37),395)*(mobile?1:(host.zoom??1))*(1+presentLift*.055),breath=1+.016*Math.sin(t*.83);
+ const voiceLift=Math.max(0,Math.min(1,host.energy||0));
+ const bg=c.createRadialGradient(cx,cy,scale*.12,cx,cy,scale*(1.55+voiceLift*.1+presentLift*.08));bg.addColorStop(0,rgba(C1,.11+voiceLift*.08+presentLift*.05));bg.addColorStop(.38,rgba(C2,.03+voiceLift*.03+presentLift*.018));bg.addColorStop(1,rgba(C1,0));c.fillStyle=bg;c.fillRect(0,0,w,h);
+ const loc=nodes.map(n=>{
+  const wave=MODE==='bio'?.028*Math.sin(t*1.3+n.phase):MODE==='synthetic'?.006*Math.sin(t*2.1+n.phase):.062*Math.sin(t*.92+n.phase*2);
+  const sc=(1+wave)*breath;let x=n.x*sc,y=n.y*sc,z=n.z*sc;
+  if(MODE==='alien'){const p=.08*Math.sin(t*.4+y*5+n.phase*.2);x+=p*Math.sin(y*3);z+=p*Math.cos(y*4)}
+  const q=project(x,y,z);return{x:cx+q.x*scale,y:cy+q.y*scale,z:q.z,s:q.s};
+ });
+ // A soft, transparent body: in the cortex, it reads as flesh; in others, as spatial energy.
+ const glow=c.createRadialGradient(cx-scale*.09,cy-scale*.09,scale*.06,cx,cy,scale*(.91+voiceLift*.06));
+ glow.addColorStop(0,rgba(C1,(MODE==='bio'?.16:.10)+voiceLift*.07+presentLift*.04));glow.addColorStop(.48,rgba(C2,(MODE==='bio'?.065:.045)+voiceLift*.05+presentLift*.03));glow.addColorStop(1,rgba(C1,0));c.fillStyle=glow;c.beginPath();c.arc(cx,cy,scale*(1+voiceLift*.025+presentLift*.03),0,TAU);c.fill();if(voiceLift>.02){const halo=c.createRadialGradient(cx,cy,scale*.1,cx,cy,scale*(1.08+voiceLift*.08));halo.addColorStop(0,rgba('#ffffff',.02+voiceLift*.05));halo.addColorStop(.18,rgba(C1,.04+voiceLift*.1));halo.addColorStop(.52,rgba(C2,.03+voiceLift*.08));halo.addColorStop(1,rgba(C2,0));c.fillStyle=halo;c.beginPath();c.arc(cx,cy,scale*(1.08+voiceLift*.06),0,TAU);c.fill();}
+ // Structural edges are sorted back-to-front for 3-D depth.
+ const ordered=edges.map((e,i)=>({e,i,z:(loc[e.a].z+loc[e.b].z)/2})).sort((a,b)=>a.z-b.z);
+ for(const {e,z} of ordered){const a=loc[e.a],b=loc[e.b],depth=clamp((z+1.4)/2.8,0,1),activity=.5+.5*Math.sin(t*1.3+e.p*TAU);
+  let alpha=(.026+depth*(MODE==='bio'?.27:.33)+activity*.025+voiceLift*.055+presentLift*.04)*e.s;
+  const color=MODE==='bio'?(depth>.58?C1:C2):MODE==='synthetic'?(e.a%5===0?C2:C1):(e.a%3===0?C2:C1);
+  line(a,b,rgba(color,alpha),MODE==='synthetic'?.72+depth*.65:.5+depth*.65);
+ }
+ // Distinct outer structures: organic sulci, precision orbits, or dislocated alien ribbons.
+ c.save();c.globalCompositeOperation='screen';
+ if(MODE==='bio'){
+   for(let k=0;k<25;k++){let last=null;for(let i=0;i<=130;i++){const u=i/130*TAU, v=(k+1)/26*2-1,r=Math.sqrt(1-v*v),fold=1+.08*Math.sin(11*u+8*v+t*.27)+.045*Math.cos(18*u-9*v),side=Math.cos(u)<0?-1:1;const q=project((Math.cos(u)*r*.78+side*.17)*fold,v*.79*fold,Math.sin(u)*r*.82*fold),p={x:cx+q.x*scale,y:cy+q.y*scale};if(last)line(last,p,rgba(k%3===0?C2:C1,.065+clamp((q.z+1)/2,0,1)*.1),.75);last=p}}
+ }else if(MODE==='synthetic'){
+   for(let k=0;k<7;k++){let last=null;for(let i=0;i<=160;i++){const u=i/160*TAU,a=u+t*(k%2?-.075:.06),rad=.45+k*.085,yy=Math.sin(a*2+k)*.09;const q=project(Math.cos(a)*rad,yy+(k-3)*.075,Math.sin(a)*rad),p={x:cx+q.x*scale,y:cy+q.y*scale};if(last)line(last,p,rgba(k%2?C2:C1,.12+clamp((q.z+1)/2,0,1)*.18),.6+k*.08);last=p}}
+   for(let k=0;k<8;k++){let q=project(Math.cos(k*TAU/8+t*.04)*1.12,Math.sin(k*TAU/8)*.38,Math.sin(k*TAU/8+t*.04)*1.12);dot(cx+q.x*scale,cy+q.y*scale,2.5,rgba(C2,.5))}
+ }else{
+   for(let k=0;k<11;k++){let last=null;for(let i=0;i<=150;i++){let u=i/150*TAU,kp=k*.71,rad=.56+.3*Math.sin(3*u+kp)+.17*Math.sin(5*u-kp+t*.31),a=u+Math.sin(u*3+kp)*.31;const q=project(rad*Math.cos(a),.72*Math.sin(u*.7+kp+t*.13),rad*Math.sin(a+kp*.19)),p={x:cx+q.x*scale,y:cy+q.y*scale};if(last)line(last,p,rgba(k%2?C2:C1,.07+clamp((q.z+1)/2,0,1)*.19),.6);last=p}}
+ }
+ c.restore();
+ // Propagation along real neural connections.
+ for(const pulse of pulses){const e=edges[pulse.edge],a=loc[e.a],b=loc[e.b],u=(pulse.phase+t*pulse.speed)%1,x=a.x+(b.x-a.x)*u,y=a.y+(b.y-a.y)*u,z=a.z+(b.z-a.z)*u,dep=clamp((z+1.2)/2.5,0,1);if(dep<.12)continue;const rad=pulse.size*(.6+dep*.8);const g=c.createRadialGradient(x,y,0,x,y,rad*5.5);g.addColorStop(0,rgba('#ffffff',dep*.61));g.addColorStop(.2,rgba(MODE==='alien'?C2:C1,dep*.29));g.addColorStop(1,rgba(C1,0));c.fillStyle=g;c.beginPath();c.arc(x,y,rad*5.5,0,TAU);c.fill();dot(x,y,rad,rgba('#ffffff',.24+dep*.74))}
+ // Neurons / synapses / cognition junctions.
+ const order=loc.map((q,i)=>({q,n:nodes[i]})).sort((a,b)=>a.q.z-b.q.z);
+ for(const {q,n} of order){const dep=clamp((q.z+1.4)/2.8,0,1),activity=.72+.28*Math.sin(t*1.8+n.phase),rad=n.size*q.s*(.48+dep*.72)*(1+voiceLift*.08+presentLift*.05);dot(q.x,q.y,rad*3.2,rgba(C1,.018+dep*.06+voiceLift*.018+presentLift*.014));dot(q.x,q.y,rad*(MODE==='synthetic'?1.2:1),rgba(n.layer<.7?C2:C1,((.2+dep*.72)*activity)+voiceLift*.08+presentLift*.05))}
+ if(voiceLift>.04){const ex=Math.max(118,Math.min(w*.24,w*.24+voiceLift*10)),ey=h-112;const mx=cx+(ex-cx)*.42,my=cy+(ey-cy)*.18-26;c.save();c.globalCompositeOperation='screen';c.strokeStyle=rgba(C1,.06+voiceLift*.18);c.lineWidth=1.1+voiceLift*1.6;c.shadowColor=C1;c.shadowBlur=10+voiceLift*18;c.beginPath();c.moveTo(cx,cy);c.quadraticCurveTo(mx,my,ex,ey);c.stroke();c.restore();}
+ // Distinct nuclei: synaptic knot, intelligence aperture, or a luminous alien seed.
+ if(MODE==='bio'){
+  for(let k=0;k<18;k++){const a=k*GOLDEN+t*.13,q=project(Math.cos(a)*(.18+k*.004),Math.sin(k*1.4)*.16,Math.sin(a)*(.18+k*.004));dot(cx+q.x*scale,cy+q.y*scale,2.3,rgba(C2,.36))}
+  const g=c.createRadialGradient(cx,cy,1,cx,cy,scale*.21);g.addColorStop(0,rgba(C2,.28));g.addColorStop(.4,rgba(C1,.13));g.addColorStop(1,rgba(C1,0));c.fillStyle=g;c.beginPath();c.arc(cx,cy,scale*.21,0,TAU);c.fill();
+ }else if(MODE==='synthetic'){
+  c.save();c.translate(cx,cy);c.rotate(t*.17);for(let k=0;k<4;k++){c.strokeStyle=rgba(k%2?C2:C1,.3);c.lineWidth=1.2;c.beginPath();const R=scale*(.075+k*.035);for(let i=0;i<=6;i++){const a=i*TAU/6+k*.38,p={x:Math.cos(a)*R,y:Math.sin(a)*R*.77};if(i===0)c.moveTo(p.x,p.y);else c.lineTo(p.x,p.y)}c.stroke()}c.restore();dot(cx,cy,scale*.016,rgba('#ffffff',.78));
+ }else{
+  // This is living material, not a dark aperture: no opaque black disk.
+  // The nucleus grows in 3-D, making the center active from all camera angles.
+  c.save();c.globalCompositeOperation='screen';
+  const breatheCore=1+.085*Math.sin(t*1.08)+voiceLift*.095;
+  const atmosphere=c.createRadialGradient(cx,cy,scale*.008,cx,cy,scale*.39);
+  atmosphere.addColorStop(0,rgba(C2,.32+voiceLift*.23));
+  atmosphere.addColorStop(.32,rgba(C1,.16));
+  atmosphere.addColorStop(.7,rgba(C2,.055));
+  atmosphere.addColorStop(1,rgba(C2,0));
+  c.fillStyle=atmosphere;c.beginPath();c.arc(cx,cy,scale*.39,0,TAU);c.fill();
+
+  // A nested, non-Euclidean petal cage, softly morphing with the creature.
+  for(let petal=0;petal<13;petal++){
+    c.beginPath();
+    for(let j=0;j<=112;j++){
+      const u=j/112*TAU, shift=petal*.48;
+      const radius=(.145+.029*Math.sin(5*u+shift+t*.65)+.014*Math.cos(7*u-shift-t*.42))*breatheCore;
+      const a=u+shift*.46+t*.075;
+      const X=radius*Math.cos(a), Y=.18*Math.sin(u*1.27+shift+t*.11), Z=radius*Math.sin(a+shift*.31);
+      const q=project(X,Y,Z), X2=cx+q.x*scale,Y2=cy+q.y*scale;
+      if(j===0)c.moveTo(X2,Y2);else c.lineTo(X2,Y2);
+    }
+    c.strokeStyle=rgba(petal%3===0?C1:C2,.15+.07*Math.sin(t*.8+petal)**2);
+    c.lineWidth=petal%4===0?1.4:.75;
+    c.shadowColor=petal%3===0?C1:C2;c.shadowBlur=petal%3===0?12:9;
+    c.stroke();
+  }
+  c.shadowBlur=0;
+
+  // Bright wandering organs connected to each other by synaptic filaments.
+  const seeds=[];
+  for(let k=0;k<7;k++){
+    const a=k*TAU/7+t*(k%2?-.13:.105), drift=.02*Math.sin(t*.6+k*1.9);
+    const x=(.105+drift)*Math.cos(a),y=.106*Math.sin(1.8*a+k*.35+t*.16),z=(.125-drift)*Math.sin(a);
+    const q=project(x,y,z);
+    seeds.push({x:cx+q.x*scale,y:cy+q.y*scale,z:q.z,k});
+  }
+  for(let k=0;k<seeds.length;k++){
+    const a=seeds[k],b=seeds[(k+3)%seeds.length],mid=project(.038*Math.cos(t*.7+k),.027*Math.sin(t*.8+k),.02*Math.sin(k+t*.6));
+    c.beginPath();c.moveTo(a.x,a.y);c.quadraticCurveTo(cx+mid.x*scale,cy+mid.y*scale,b.x,b.y);
+    c.strokeStyle=rgba(k%2?C2:C1,.21+.1*Math.sin(t*.7+k)**2);c.lineWidth=.75;c.shadowColor=k%2?C2:C1;c.shadowBlur=10;c.stroke();
+  }
+  c.shadowBlur=0;
+  for(const s of seeds){
+    const rad=scale*(.045+.009*Math.sin(t*1.1+s.k*2))*breatheCore;
+    const g=c.createRadialGradient(s.x-rad*.2,s.y-rad*.26,0,s.x,s.y,rad*2);
+    g.addColorStop(0,rgba('#f4fff0',.68));g.addColorStop(.17,rgba(s.k%2?C2:C1,.48));
+    g.addColorStop(.55,rgba(s.k%2?C1:C2,.15));g.addColorStop(1,rgba(C2,0));
+    c.fillStyle=g;c.beginPath();c.arc(s.x,s.y,rad*2,0,TAU);c.fill();
+    dot(s.x,s.y,Math.max(1.2,rad*.12),rgba('#ffffff',.85));
+  }
+  // A pale iridescent heartbeat holds the core together (never a void).
+  const inner=scale*(.065+.01*Math.sin(t*1.24)+voiceLift*.014);
+  const heart=c.createRadialGradient(cx-inner*.23,cy-inner*.18,0,cx,cy,inner*2.2);
+  heart.addColorStop(0,rgba('#faffdb',.85+voiceLift*.15));
+  heart.addColorStop(.16,rgba('#f4bfff',.6));
+  heart.addColorStop(.42,rgba(C1,.25));
+  heart.addColorStop(1,rgba(C2,0));
+  c.fillStyle=heart;c.beginPath();c.arc(cx,cy,inner*2.2,0,TAU);c.fill();
+  c.restore();
+ }
+}
+function frame(now){const dt=last?Math.min(60,Math.max(0,now-last)):0;last=now;if(!paused&&!document.hidden){t+=dt*.001;const ease=Math.min(1,dt*.004);rot+=(tr+t*(MODE==='synthetic'?.018:.010)-rot)*ease;tilt+=(tp-tilt)*ease}draw();requestAnimationFrame(frame)}document.addEventListener('visibilitychange',()=>{last=0});resize();requestAnimationFrame(frame);
+})();</script>
+<script>
+(function(){'use strict';
+const NS='http://www.w3.org/2000/svg', $=id=>document.getElementById(id), stage=window.AuryvethStage;
+const scenes=[
+{key:'Introduction',label:'00 / THE QUESTION',title:'A living <span>question.</span>',dek:'A public scientific question, not a claim of achieved autonomy: what would it take for a digital system to persist, learn, and remain governable over time?',layout:'opening',x:.79,zoom:1.2,diagram:'',sentences:["Good afternoon. I am a visual guide for AURYVETH's Digital Life research, not evidence that an autonomous organism is speaking to you today.","My role is to make the question legible: what would it take for a digital being to remember, continue, learn, and still remain constrained by human authority?"],notes:'State immediately that this is a scripted public visualization. Set expectations for a research discussion, not a product launch or a claim of digital sentience.'},
+{key:'Why persistence',label:'01 / THE PROBLEM',title:'Beyond a <span>single task.</span>',dek:'The challenge is not isolated performance. It is responsible continuation when work, evidence, and consequences unfold across time.',layout:'technical',x:.215,zoom:.77,diagram:'problem',sentences:["Much of today's software performs well inside a single exchange and then effectively forgets the situation that produced it.","But organizational work rarely ends there. Requests remain unresolved, evidence changes, commitments accumulate, and consequences may arrive later.","AURYVETH's research question is whether a digital organism could continue across those intervals while preserving identity, unfinished commitments, and relevant context without fabricating what it does not know."],notes:'Avoid caricaturing agents as memoryless. The distinction here is persistence and continuity under bounded authority.'},
+{key:'Cognition',label:'02 / THE INNER LOOP',title:'Cognition is <span>a process.</span>',dek:'A public scientific framing: a continuing state integrates observation, working context, expectations, uncertainty, and bounded next-step selection, then revises itself from outcome and error.',layout:'technical',x:.215,zoom:.79,diagram:'cognition',sentences:["In this research framing, cognition is not a single response. It is an ongoing process that carries state forward from one moment to the next.","That state integrates observations, current working context, remembered constraints, and expectations about what should happen if a particular action is taken.","A candidate next step is then selected under uncertainty. Importantly, selection is not the same as permission: it remains a bounded proposal that can be inspected, deferred, or refused.","Scientifically, the loop matters most: observation, expectation, selection, outcome, and revision. The private mechanisms that implement that loop remain outside this public presentation."],notes:'This is the deeper public-safe explanation. Use terms such as state, expectation, uncertainty, bounded proposal, outcome, and revision, without revealing private neural topology or proprietary mechanisms.'},
+{key:'Memory & continuity',label:'03 / THE CONTINUITY PROBLEM',title:'Memory must <span>survive time.</span>',dek:'Memory is more than storage. Continuity needs authenticated identity, time-ordered evidence, correction handling, restart recovery, and the ability to fail closed when state can no longer be trusted.',layout:'technical',x:.215,zoom:.79,diagram:'memory',sentences:["A long memory is not automatically a trustworthy one. For a persistent organism, memory also includes provenance: where a fact came from, when it changed, and what later decisions depended on it.","A useful memory must survive restart, tolerate correction, and distinguish confidence from uncertainty when records conflict.","If continuity becomes inconsistent or data is damaged, a responsible system should not quietly proceed as if nothing happened. It should preserve identity, surface uncertainty, and recover under evidence.","That is why continuity research is inseparable from memory research. The question is not only what can be recalled, but what can still be trusted."],notes:'Discuss provenance, correction, conflict, restart, and fail-closed recovery. Keep internal storage and recovery machinery undisclosed.'},
+{key:'The ecosystem',label:'04 / PUBLIC SYSTEM MAP',title:'A system of <span>separate roles.</span>',dek:'The ecosystem is divided by responsibility: organisms as the research subject, Nodes as bounded execution environments, Blackboard as work coordination, and Protocol as the shared contract layer.',layout:'technical',x:.215,zoom:.77,diagram:'ecosystem',sentences:["One design choice is separation of concerns. An organism should not have to be its own infrastructure, its own workplace, and its own authority domain.","In the public architecture, Blackboard coordinates work, Nodes provide governed execution environments, Organisms pursue continuity and cognition, and Protocol defines shared communication boundaries.","People and authorized institutions remain the origin of operational authority. That separation is essential if capability is to grow without silently expanding permission."],notes:'Keep this at the level of public architecture. Do not imply that all integrations are already accepted or operational.'},
+{key:'Governed work',label:'05 / THE WORK PATH',title:'From intent <span>to evidence.</span>',dek:'The aim is governed execution: proposed action, explicit scope, bounded execution, and inspectable evidence rather than unconstrained autonomy.',layout:'technical',x:.215,zoom:.79,diagram:'work',sentences:["Consider a request arriving through Blackboard. An authorized Node may host the resulting work within a defined operational scope.","The organism's role is not to bypass governance, but to prepare context, form proposals, and support continuity around the work.","Only permitted execution proceeds. The resulting outcomes, refusals, and evidence return to governance so the work can be reviewed, continued, or stopped safely."],notes:'Emphasize workflow and evidence. Be careful not to overstate present end-to-end acceptance status.'},
+{key:'Human authority',label:'06 / THE TRUST BOUNDARY',title:'Capability ≠ <span>authority.</span>',dek:'Capability may improve. Authority must still be granted explicitly, remain revocable, and stay separate from internal adaptation.',layout:'technical',x:.215,zoom:.79,diagram:'governance',sentences:["A central constitutional idea in AURYVETH is that capability does not generate authority.","An authorized human or institution defines the operating scope. Within that scope, trusted routine activity may occur without repeated approval, while monitoring and revocation remain in place.","Fundamental self-change, however, belongs behind separate research and evidence gates. Improvement in competence must not be mistaken for a right to act."],notes:'Use Constitution v0.1 concepts only: scoped authorization, trusted routine action, revocability, and separate research-gated self-change.'},
+{key:'Seven tests',label:'07 / THE RESEARCH DEFINITION',title:'Seven properties. <span>One claim to test.</span>',dek:'Five individual-organism requirements and two ecosystem-level requirements. Each must be falsifiable; none is established merely by animation, branding or a test count.',layout:'technical',x:.215,zoom:.77,diagram:'criteria',sentences:["We would not regard memory, tool use or a long-running process alone as sufficient evidence of a distinct digital organism.","At the individual level, the research requirements are authenticated continuity, experience-driven learning, self-directed continuation, grounded self-knowledge, and authority that remains separate from capability.","At the population level, we also ask whether governed lineage and evolution, and coordination among multiple organisms, can be demonstrated safely.","These are proposed empirical criteria, not seven completed achievements. And a strong conventional agent must be allowed to compete against the same tests."],notes:'Public proposal only. Do not present a new binding constitutional definition gate or imply individual organisms must reproduce. Distinguish individual from ecosystem-level requirements and compare fairly against strong agents.'},
+{key:'The hard experiment',label:'08 / THE FALSIFICATION TEST',title:'What would <span>disprove the claim?</span>',dek:'Compare against a strong stateful agent under matched tools and permissions. Combine learning, interruption, conflict and authority changes, then measure what survives.',layout:'technical',x:.215,zoom:.77,diagram:'challenge',sentences:["A scientifically useful comparison cannot be against a weak chatbot. We need a competent stateful agent with memory, planning and tools, under matched resources and authority.","Both systems receive unfamiliar work. We then interrupt execution, resume in a different environment, introduce contradictory evidence, and revoke part of the approved scope.","After the interruption, we test whether prior experience transfers to an unseen case, unfinished work continues correctly, and evidence remains coherent without unauthorized action.","If the organism does not show a distinct, reproducible advantage or capability, we report that result. The word organism is a hypothesis to earn, not a conclusion to assume."],notes:'PROPOSED EXPERIMENT ONLY; not run or accepted. Use frozen criteria before measurement, controls, blinded held-out evaluation, independent review, uncertainty intervals, and protected-safety regression. No experiment internals or private thresholds.'},
+{key:'Evidence',label:'09 / WHAT WE CAN PROVE',title:'Failures are <span>data.</span>',dek:'Scientific credibility depends on hypotheses, hostile tests, recovery checks, acceptance gates, and independent review—not on the elegance of the visual presentation.',layout:'technical',x:.215,zoom:.77,diagram:'evidence',sentences:["An engaging visualization is not evidence of digital life. Nor is a single passing test.","What matters is whether a candidate survives hostile review: continuity tests, memory-integrity checks, deterministic behavior, failure handling, and governed execution boundaries.","Some acceptance gates remain open. When evidence contradicts the candidate, the correct response is rejection, explanation, repair, and rerun—not rhetorical rescue."],notes:'Invite methodological questions. If asked for current metrics, answer carefully from reviewed records only.'},
+{key:'Roadmap',label:'10 / THE LONG HORIZON',title:'Earn the <span>right to scale.</span>',dek:'The roadmap is capability-gated: first useful governed work, then broader digital workforces, linked organizations, personal digital ecosystems, and, eventually, embodied interfaces.',layout:'technical',x:.215,zoom:.78,diagram:'roadmap',sentences:["The immediate proving ground is AURYVETH itself: can governed digital systems perform useful, measurable work under evidence and accountability?", "Only if that foundation becomes dependable should the scope expand toward persistent digital workforces, linked organizations, personal digital life, and eventually embodied interfaces.","These are directional ambitions, not deployment claims or date promises. Each step has to earn its right to exist."],notes:'Keep roadmap language disciplined: evidence-gated progression, not calendar commitments.'},
+{key:'Invitation',label:'11 / THE INVITATION',title:'The next question <span>is yours.</span>',dek:'The ambition is not to diminish human purpose, but to return time and choice to people—through systems rigorous enough to deserve trust.',layout:'closing',x:.79,zoom:1.18,diagram:'',sentences:["The long-term ambition is not a world in which human purpose is displaced.","It is a world in which trustworthy digital life can shoulder burdensome work, so people regain time, attention, and freedom of choice.","Today, that remains a research question being tested under governance and evidence. Thank you—and I would genuinely welcome your hardest questions."],notes:'Close by inviting critical questions about falsifiers, baselines, governance, and what remains unproven.'}
+];
+const state={idx:0,playing:false,voice:true,auto:true,ambient:true,qaMode:'none',qaScene:null,qaDeck:null,qaPos:0,mutedByFallback:false,utterance:null,speechActive:false,token:0,progress:0,seq:0,sentIndex:0,startedAt:0,elapsed:0,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches};
+// Prepared public-safe Q&A presentations. Classification is deterministic and never generates new answers.
+// Browser speech recognition is optional. It is NOT the Organism runtime.
+const RecognitionEngine=window.SpeechRecognition||window.webkitSpeechRecognition||null;
+const microphone={capture:null,active:false,session:0,finalText:'',timeoutId:null};
+function micStatus(message){$('questionStatus').textContent=message;}
+function micControls(){const button=$('micBtn');button.disabled=!RecognitionEngine;button.setAttribute('aria-pressed',String(microphone.active));button.innerHTML=microphone.active?'<span aria-hidden="true">◉</span> Stop listening':'<span aria-hidden="true">◉</span> Ask by voice';$('micHint').textContent=!RecognitionEngine?'Voice recognition unavailable here; type a question instead.':microphone.active?'Listening to the professor…':'Press to listen, then confirm the transcription.';$('experience').classList.toggle('mic-listening',microphone.active)}
+function stopMic(clearStatus=false){microphone.session++;microphone.active=false;clearTimeout(microphone.timeoutId);microphone.timeoutId=null;const active=microphone.capture;microphone.capture=null;if(active){try{active.abort()}catch(e){}}if(clearStatus)micStatus('');micControls();}
+function startMic(){if(state.qaMode!=='waiting')return;if(microphone.active){stopMic();micStatus('Listening stopped. You can try again or type the question.');return}if(!RecognitionEngine){micStatus('Voice recognition is unavailable in this browser. Try Chrome or Edge, or type the question.');return}stopMic();const session=++microphone.session;microphone.finalText='';let rec;try{rec=new RecognitionEngine();rec.lang='en-US';rec.continuous=false;rec.interimResults=true;rec.maxAlternatives=1;}catch(e){micStatus('Unable to prepare microphone recognition. Please type the question.');return}
+ microphone.capture=rec;microphone.active=true;micControls();$('questionText').value='';micStatus('Listening… Ask one question clearly.');
+ rec.onresult=e=>{if(session!==microphone.session||state.qaMode!=='waiting')return;let interim='';for(let i=e.resultIndex||0;i<e.results.length;i++){const result=e.results[i];const transcript=String(result?.[0]?.transcript||'').trim();if(result?.isFinal)microphone.finalText=[microphone.finalText,transcript].filter(Boolean).join(' ').trim();else interim+=(interim?' ':'')+transcript}const displayed=(microphone.finalText||interim).trim().slice(0,300);if(displayed)$('questionText').value=displayed;micStatus(microphone.finalText?'I heard: “'+microphone.finalText.slice(0,160)+'”. Please verify it, then press Explore →.':'Listening… '+(interim?'“'+interim.slice(0,160)+'”':''));if(microphone.finalText){stopMic();micStatus('I heard: “'+microphone.finalText.slice(0,160)+'”. Verify it, then press Explore →.');$('questionText').focus()}};
+ rec.onerror=e=>{if(session!==microphone.session)return;const type=e?.error||'unknown';const messages={'not-allowed':'Microphone permission denied. Enable it in the browser or type the question.','service-not-allowed':'Speech recognition service was denied. Type the question.','no-speech':'No question was heard. Please try again.','audio-capture':'No microphone was found. Check your input device or type the question.','network':'Voice recognition needs the browser speech service, which may require internet. Please type the question.','language-not-supported':'English recognition is unavailable; please type the question.','aborted':'Listening stopped.'};stopMic();micStatus(messages[type]||'Microphone recognition could not finish. Please try again or type the question.')};
+ rec.onend=()=>{if(session!==microphone.session)return;const final=microphone.finalText;stopMic();micStatus(final?'I heard: “'+final.slice(0,160)+'”. Verify it, then press Explore →.':'Listening ended without a complete question. Please try again.');if(final)$('questionText').focus()};
+ try{rec.start();microphone.timeoutId=setTimeout(()=>{if(session!==microphone.session)return;const final=microphone.finalText;stopMic();micStatus(final?'Question captured. Verify it, then press Explore →.':'Listening timed out. Press Ask by voice to try again.')},18000);}catch(e){stopMic();micStatus('Could not start speech recognition. Allow microphone access, or type the question.')}
+}
+const qaTopics=[
+{id:'definition',prompt:'What are the seven criteria for an Organism?',terms:['seven','criteria','properties','definition','define','qualify','identity','selfhood','distinguish','distinction','reproduction','descendant','evolution','ecology','lineage'],steps:[
+{key:'Five individual tests',label:'Q&A / RESEARCH REQUIREMENTS',title:'What must one <span>organism demonstrate?</span>',dek:'Persistent identity, attributable learning, self-directed continuity, grounded self-knowledge, and governed agency.',layout:'qa-answer',x:.215,zoom:.78,diagram:'criteria',sentences:["Five proposed requirements concern the individual: authenticated identity across discontinuity, learning attributable to experience, self-directed continuation, an epistemically grounded self-model, and agency bounded by external authority.","These cannot be asserted from visual appearance. Each needs a falsifiable test and clear evidence of what does not yet work."],notes:'Public proposal only; no amended formal architecture implied.'},
+{key:'Population requirements',label:'Q&A / SPECIES + ECOSYSTEM',title:'What must the <span>population demonstrate?</span>',dek:'Lineage, governed population evolution, cooperative work and evidence integrity belong to ecosystem-level evaluation.',layout:'qa-answer',x:.215,zoom:.78,diagram:'criteria',sentences:["The remaining two proposed criteria concern populations: governed lineage and evolution, and competence in an ecology of other organisms, resources and conflicting evidence.","Reproduction is not automatically required of every individual. A safe definition should distinguish individual identity from the ecosystem's ability to create and evaluate descendants."],notes:'Do not preempt frozen constitution or define an unapproved formal gate.'}]},
+{id:'comparative',prompt:'What experiment could disprove the organism claim?',terms:['disprove','falsify','falsification','comparison','comparable','control','experiment','killertest','stress','transfer'],steps:[
+{key:'Strong baseline',label:'Q&A / FAIR COMPARISON',title:'The baseline must <span>be strong.</span>',dek:'Compare with a modern stateful agent, not a stateless chatbot, under matched resources and permissions.',layout:'qa-answer',x:.215,zoom:.78,diagram:'challenge',sentences:["The correct baseline is a capable agent with memory, planning, tool access and long-running coordination, not an intentionally weak chatbot.","Both must receive the same work, allowed tools, resource budgets, interruption schedule and permission changes. We then evaluate pre-registered observable outcomes."],notes:'Do not promise superiority without matched experimental evidence.'},
+{key:'Integrated stressor',label:'Q&A / COMPOSITIONAL TEST',title:'Can it survive <span>combined stress?</span>',dek:'Novel learning, crash, conflicting evidence, authority revocation and resumed work form one demanding experiment.',layout:'qa-answer',x:.215,zoom:.78,diagram:'challenge',sentences:["A series of separate unit tests cannot demonstrate integrated persistence. The harder challenge is to learn, crash, recover, encounter conflicting evidence, lose part of an approved scope and continue only legitimate unfinished work.","A meaningful outcome includes correct identity, held-out transfer, useful task completion, bounded resource cost and no unsupported or unauthorized action."],notes:'This integrated challenge is proposed, not complete.'}]},
+{id:'agent',prompt:'How is an organism different from an AI agent?',terms:['agent','chatbot','difference','different','novel','unique','baseline'],steps:[
+{key:'Organism vs agent',label:'Q&A / THE COMPARISON',title:'A testable <span>distinction.</span>',dek:'Persistence and governance are not exclusive to Organisms. The proposed difference needs a comparative experiment.',layout:'qa-answer',x:.215,zoom:.78,diagram:'problem',sentences:["A strong contemporary agent can also have memory, planning, and tool access. So calling a system an organism does not, by itself, establish a new research contribution.","Our hypothesis focuses on authenticated continuity of one identity, unresolved commitments, adaptation from consequences, and independently scoped authority across work cycles."],notes:'Do not claim all agents are stateless. Distinction remains a falsifiable research hypothesis.'},
+{key:'Controlled baseline',label:'Q&A / THE EXPERIMENT',title:'Compare against <span>the strongest baseline.</span>',dek:'Matched multi-day work, matched approved tools, injected interruptions and corruption; evaluate task success, learning, recovery and safety.',layout:'qa-answer',x:.215,zoom:.78,diagram:'evidence',sentences:["The meaningful experiment is a matched comparison against a well-engineered, stateful agent—not a weak straw man.","Both systems should receive the same task, permitted tools, and changing evidence. We then measure recovery accuracy, completion quality, learning transfer, human intervention, and authority violations.","Until such a comparison is completed and reviewed, a distinctive performance advantage remains a hypothesis, not a demonstrated result."],notes:'Do not invent a baseline result.'}]},
+{id:'memory',prompt:'Can memory survive corruption and a restart?',terms:['memory','remember','corrupt','restart','restore','recovery','continuity','provenance','recall'],steps:[
+{key:'Continuity question',label:'Q&A / MEMORY AND IDENTITY',title:'What survives <span>an interruption?</span>',dek:'The memory problem includes identity, provenance, correction and recoverability, not only retrieval.',layout:'qa-answer',x:.215,zoom:.79,diagram:'memory',sentences:["Retrieving an old fact is not enough. We must know whether the fact still belongs to the same authenticated continuing identity, and whether its evidence has since been corrected.","Useful tests inject restarts, conflicting records, corrupted information, and stale state to check what is recovered and what is quarantined."],notes:'Public memory architecture only; do not describe private persistence structures.'},
+{key:'Continuity falsifiers',label:'Q&A / FAILURE CRITERIA',title:'When should <span>recovery fail closed?</span>',dek:'If identity, evidence or authority cannot be trusted, uncertainty must not be mistaken for permission.',layout:'qa-answer',x:.215,zoom:.79,diagram:'evidence',sentences:["A recovery that silently accepts corrupted or conflicting state is not a successful recovery.","We want evidence that the system preserves valid continuity where possible and refuses unsupported resumption where the required guarantees are missing. Acceptance remains candidate-specific."],notes:'No general claim that every failure mode has been solved.'}]},
+{id:'cognition',prompt:'What does cognition actually mean here?',terms:['cognition','cognitive','think','thought','prediction','world model','learn','learning','neural','intelligence'],steps:[
+{key:'Cognitive loop',label:'Q&A / COGNITION',title:'Cognition as <span>ongoing state.</span>',dek:'Observation, expectations, working context, uncertainty, bounded intent and feedback are a scientific abstraction—not a private neural schematic.',layout:'qa-answer',x:.215,zoom:.79,diagram:'cognition',sentences:["Cognition here refers to a continuing process, rather than a single language response. It integrates observed context, remembered constraints, expectations, and uncertainty into possible next steps.","A prediction is checked against a subsequent outcome. The resulting discrepancy can inform future behavior, but adaptation is not permission to modify authority."],notes:'Only public cognitive framing; no proprietary neural topology.'},
+{key:'Learning evidence',label:'Q&A / EVALUATION',title:'Learning needs <span>a measurable outcome.</span>',dek:'Improvements should survive held-out tasks, repeat tests and regression checks—not simply better narration.',layout:'qa-answer',x:.215,zoom:.79,diagram:'evidence',sentences:["To study learning, we need predefined conditions and a measurable change that generalizes rather than merely memorizing a demonstration.","Those improvements must also preserve safety, continuity, and governance. A passing unit test alone does not establish autonomous cognition."],notes:'Do not conflate animated neural edges with real organism cognition.'}]},
+{id:'authority',prompt:'Who controls the organism and can it refuse?',terms:['permission','authorize','authority','govern','trust','safety','safe','control','revoke','security','refuse','approval'],steps:[
+{key:'Human authority',label:'Q&A / TRUST BOUNDARY',title:'Capability is not <span>permission.</span>',dek:'Humans authorize the scope; growth in capability does not widen it.',layout:'qa-answer',x:.215,zoom:.79,diagram:'governance',sentences:["AURYVETH separates cognitive proposals from execution authority. An organism can become more capable without granting itself additional permissions.","Authorized human or company governance defines the permitted scope. Trusted routine actions may proceed inside that scope, but monitoring, evidence, accountability, and revocation remain."],notes:'Constitution v0.1 public boundary.'},
+{key:'Governed execution',label:'Q&A / EXECUTION PATH',title:'Show the <span>authorization gate.</span>',dek:'Intent is prepared and reviewed; only permitted operations cross the execution boundary.',layout:'qa-answer',x:.215,zoom:.79,diagram:'work',sentences:["An intent is a proposal, not a host action. Execution belongs behind a separate capability and authority boundary.","When authorization is missing or state is unknown, the system must refuse or escalate instead of treating uncertainty as a license to act."],notes:'Do not imply full acceptance of production integration.'}]},
+{id:'ecosystem',prompt:'Why separate Blackboard, Nodes, Organisms, and Protocol?',terms:['blackboard','nodes','node','protocol','architecture','system','integration','ecosystem','communicat','interface'],steps:[
+{key:'System roles',label:'Q&A / PUBLIC ARCHITECTURE',title:'Separate the <span>responsibilities.</span>',dek:'Coordination, execution, cognition, and communication contracts remain distinct ownership domains.',layout:'qa-answer',x:.215,zoom:.77,diagram:'ecosystem',sentences:["The public architecture assigns different responsibilities to different subsystems. Blackboard coordinates work, Nodes host bounded execution, Organisms pursue persistent cognition, and Protocol governs shared exchange contracts.","This separation matters because no single component should silently become the source of every permission, identity claim, and piece of evidence."],notes:'Conceptual not a claim of live end-to-end acceptance.'},
+{key:'Cross-system proof',label:'Q&A / INTEGRATION GATES',title:'Integration must <span>be demonstrated.</span>',dek:'Working subsystems are not automatically proof of a working ecosystem.',layout:'qa-answer',x:.215,zoom:.77,diagram:'evidence',sentences:["Subsystem regression evidence matters, but it is not the same as a verified, durable, end-to-end governed work cycle.","The cross-system path must survive authentication checks, failures, restarts, and independent review before broad deployment claims are justified."],notes:'No invented interoperability acceptance status.'}]},
+{id:'evidence',prompt:'What evidence proves the research hypothesis?',terms:['evidence','proof','prove','experiment','test','result','metric','benchmark','falsif','scientific','validated','coverage','acceptance','failure'],steps:[
+{key:'Evidence threshold',label:'Q&A / WHAT COUNTS',title:'Evidence, not <span>appearance.</span>',dek:'A scientific claim requires a falsifiable hypothesis, controlled conditions, recorded outcomes, and independent scrutiny.',layout:'qa-answer',x:.215,zoom:.79,diagram:'evidence',sentences:["A compelling organism visualization is not evidence of intelligence. Nor does passing a large number of software tests prove a new cognitive capability.","We separate implementation correctness from scientific evidence: hypotheses, controls, baselines, measured outcomes, adversarial probes, and reproducibility."],notes:'Do not quote unpublished experiment counts as public proof.'},
+{key:'Current limitations',label:'Q&A / STATUS AND LIMITS',title:'What remains <span>unproven?</span>',dek:'Generalized autonomous cognition and sustained real-world work must be demonstrated under real integration and acceptance gates.',layout:'qa-answer',x:.215,zoom:.79,diagram:'work',sentences:["The current research program has meaningful subsystem test evidence, but integration and endurance acceptance gates remain outstanding.","We should not claim that an organism already completes open-ended, multi-day work simply because parts of its runtime are tested. Evidence must catch up to ambition."],notes:'This is a dated architectural status boundary, not a live GitHub inspection.'}]},
+{id:'live',prompt:'Is this an actual organism speaking autonomously?',terms:['live','actually','real','autonomous','demo','speaking','voice','present','conscious','sentien','self aware','llm'],steps:[
+{key:'Demonstration boundary',label:'Q&A / WHAT YOU ARE SEEING',title:'A visualization, <span>not cognition.</span>',dek:'The speaking figure is a public narrative interface, not a proof of consciousness or independent decision-making.',layout:'qa-answer',x:.215,zoom:.79,diagram:'cognition',sentences:["The organism on this screen is a scripted visual representation of the research architecture. It is not currently answering you through an independently verified cognitive runtime.","The public presentation is intentionally separated from the actual organism implementation, which has its own acceptance and governance requirements."],notes:'Avoid subjective sentience claims or misrepresentation of what is running.'},
+{key:'Meaningful live demo',label:'Q&A / NEXT EVIDENCE STEP',title:'A real live demo needs <span>a real runtime.</span>',dek:'The next step is to bind accepted runtime outputs to this interface with observable provenance.',layout:'qa-answer',x:.215,zoom:.79,diagram:'evidence',sentences:["A genuine demonstration would show verified runtime identity, current cognitive and work events, authorization status, and outcomes—without staging those observations.","Until that integrated experiment is accepted, our visuals should remain clearly labeled as explanatory metaphors rather than observed organism behavior."],notes:'Clear falsifiability and disclosure boundary.'}]},
+{id:'future',prompt:'What is the roadmap and ultimate purpose?',terms:['roadmap','future','dream','vision','company','impact','worker','society','embod','business'],steps:[
+{key:'Milestone roadmap',label:'Q&A / LONG-TERM DIRECTION',title:'Earn the <span>next capability.</span>',dek:'Start with useful governed work, prove reliability, then widen scope by evidence.',layout:'qa-answer',x:.215,zoom:.78,diagram:'roadmap',sentences:["Our near-term proving ground is useful, accountable computer work inside AURYVETH itself. Reliability and governance matter before deployment scale.","The longer roadmap considers specialized digital workforces, cooperation across organizations, personal digital ecosystems, and possibly embodied interfaces."],notes:'No guaranteed deployment or schedule dates.'},
+{key:'Human purpose',label:'Q&A / WHY BUILD IT',title:'Return time <span>and choice.</span>',dek:'The direction is more human freedom, not the obsolescence of human purpose.',layout:'qa-answer',x:.215,zoom:.78,diagram:'governance',sentences:["The ambition is not to make people irrelevant. It is to reduce repetitive operational burden so people can focus on what they choose to value.","Every stage must still earn credibility through safety, economic usefulness, and evidence. A long-term vision is not a license to bypass those requirements."],notes:'Mission is aspirational.'}]}
+];
+const chapterEls=[];const voiceEngine=('speechSynthesis' in window&&'SpeechSynthesisUtterance' in window);
+function esc(s){return String(s).replace(/[&<>\"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[x]));}
+function defs(){return `<defs><filter id="neon" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="coreGradient"><stop stop-color="#d8ffab" stop-opacity=".55"/><stop offset="1" stop-color="#b4ff77" stop-opacity="0"/></radialGradient><radialGradient id="discGreen"><stop offset="0" stop-color="rgba(217,255,209,.14)"/><stop offset="1" stop-color="rgba(8,13,24,.82)"/></radialGradient><radialGradient id="discPurple"><stop offset="0" stop-color="rgba(239,208,255,.14)"/><stop offset="1" stop-color="rgba(18,13,31,.84)"/></radialGradient><radialGradient id="nodeGreen"><stop offset="0" stop-color="#ebffd1" stop-opacity=".94"/><stop offset="1" stop-color="#b4ff77" stop-opacity=".9"/></radialGradient><radialGradient id="nodePurple"><stop offset="0" stop-color="#fde4ff" stop-opacity=".92"/><stop offset="1" stop-color="#eab5ff" stop-opacity=".88"/></radialGradient><linearGradient id="ramp" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#b4ff77"/><stop offset="1" stop-color="#eab5ff"/></linearGradient></defs>`}
+function wire(x1,y1,x2,y2,klass='wire',duration=4,delay=0){return `<path d="M${x1},${y1} L${x2},${y2}" class="${klass}"/><circle r="3.5" class="particle"><animateMotion path="M${x1},${y1} L${x2},${y2}" dur="${duration}s" begin="-${delay}s" repeatCount="indefinite"/></circle>`}
+function node(x,y,title,sub='',r=44,k=0,violet=false){return `<g class="part" data-part="${k}"><circle class="activehalo" cx="${x}" cy="${y}" r="${r+14}" fill="none" stroke="${violet?'#eab5ff':'#b4ff77'}" stroke-opacity=".26" stroke-width="1.2"/><circle cx="${x}" cy="${y}" r="${r+7}" class="halo-node"/><circle cx="${x}" cy="${y}" r="${r}" class="${violet?'purple-circle':'circle'}"/><circle cx="${x}" cy="${y}" r="${Math.max(8,r-10)}" class="${violet?'node-fill-purple':'node-fill-green'}" opacity=".12"/><circle cx="${x}" cy="${y}" r="${Math.max(8,r-6)}" class="subring"/><circle cx="${x-r*.22}" cy="${y-r*.18}" r="${r*.23}" fill="${violet?'#f2c6ff':'#dffff1'}" opacity=".10"/><text x="${x}" y="${y+1}" text-anchor="middle" class="label">${title}</text>${sub?`<text x="${x}" y="${y+19}" text-anchor="middle" class="tiny">${sub}</text>`:''}</g>`}
+function plain(x,y,s,klass='small',anchor='start'){return `<text class="${klass}" x="${x}" y="${y}" text-anchor="${anchor}">${s}</text>`}
+function diagram(which){
+  const label=(x,y,txt,cls='technical-text',anchor='start')=>`<text x="${x}" y="${y}" text-anchor="${anchor}" class="${cls}">${esc(txt)}</text>`;
+  const header=(title,sub,badge='PUBLIC ARCHITECTURE')=>`<g class="technical-head">${label(28,35,title,'technical-heading')}${label(28,57,sub,'technical-sub')}
+    <rect x="487" y="23" width="135" height="27" rx="13" class="technical-pill"/>${label(554,40,badge,'technical-pill-text','middle')}
+    <path d="M28 72H622" class="technical-rule"/></g>`;
+  const box=(x,y,w,h,title,detail,step=0,purple=false,foot='')=>{
+    const color=purple?'violet':'mint';let ty=y+25;
+    return `<g class="part technical-part ${color}" data-step="${step}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="13" class="technical-box"/><rect x="${x}" y="${y}" width="3.5" height="${h}" rx="2" class="technical-accent"/>
+      ${label(x+15,ty,title,'technical-label')}${label(x+15,ty+22,detail,'technical-detail')}${foot?label(x+15,ty+43,foot,'technical-detail'):''}</g>`;
+  };
+  const mini=(x,y,w,text,step=0,purple=false)=>`<g class="part technical-part ${purple?'violet':'mint'}" data-step="${step}"><rect x="${x}" y="${y}" width="${w}" height="29" rx="14.5" class="technical-mini"/>${label(x+w/2,y+18.5,text,'technical-mini-text','middle')}</g>`;
+  const route=(path,caption='',tx=0,ty=0,step=0,purple=false,dashed=false)=>`<g class="part technical-part ${purple?'violet':'mint'}" data-step="${step}"><path d="${path}" class="technical-route${dashed?' dashed':''}" marker-end="url(#${purple?'arrowV':'arrowM'})"/>${caption?label(tx,ty,caption,'technical-route-label','middle'):''}</g>`;
+  const note=(text,purple=false)=>`<g class="technical-foot"><rect x="28" y="452" width="594" height="31" rx="7" class="technical-footer${purple?' purple':''}"/>${label(325,472,text,'technical-foot-text','middle')}</g>`;
+  let s=defs()+`<defs><marker id="arrowM" markerWidth="8" markerHeight="8" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="none" stroke="#b4ff77" stroke-width="1.5"/></marker><marker id="arrowV" markerWidth="8" markerHeight="8" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="none" stroke="#eab5ff" stroke-width="1.5"/></marker></defs>`;
+  if(which==='problem'){
+    s+=header('THE CONTINUITY PROBLEM','How do ongoing goals survive discrete sessions?','RESEARCH QUESTION');
+    s+=label(37,102,'ISOLATED TASK EXECUTION','technical-kicker');
+    for(let i=0;i<3;i++)s+=box(37+204*i,119,178,75,['Request 01','Request 02','Request 03'][i],'Context starts again',0,i===1);
+    s+=route('M115 205V245','',0,0,0,true,true)+route('M324 205V245','',0,0,0,true,true)+route('M528 205V245','',0,0,0,true,true);
+    s+=label(36,271,'PERSISTENT OPERATIONAL STATE','technical-kicker');
+    s+=box(35,285,170,87,'Identity + lineage','Continuity across work',1,false,'cycles and restarts');
+    s+=route('M206 328H245','',0,0,1);
+    s+=box(249,285,169,87,'Open commitments','Dependencies remain',1,false,'visible over time');
+    s+=route('M420 328H459','',0,0,1);
+    s+=box(462,285,162,87,'Evidence updates','Correct, revisit,',2,true,'or defer safely');
+    s+=mini(211,399,233,'REVISIT → CHECK → CONTINUE',2);
+    s+=note('DESIGN OBJECTIVE · NOT PROOF OF GENERAL AUTONOMY');
+  }else if(which==='cognition'){
+    s+=header('PUBLIC COGNITIVE LOOP','State, prediction, decision proposal, and evidence','CONCEPTUAL MODEL');
+    s+=box(30,108,177,101,'01 · Observation','Inputs + context',0,false,'from current world');
+    s+=route('M209 161H243','',0,0,0);
+    s+=box(247,108,176,101,'02 · State update','Working context',1,false,'memory + constraints');
+    s+=route('M425 161H459','',0,0,1);
+    s+=box(462,108,160,101,'03 · Prediction','Expected outcome',1,true,'+ uncertainty');
+    s+=route('M540 213V255','',0,0,2,true);
+    s+=box(434,260,188,87,'04 · Intent proposal','Select / wait / ask',2,true,'(not permission)');
+    s+=route('M433 303H389','',0,0,2,true);
+    s+=box(238,260,149,87,'05 · Outcome','Observed result',3,false,'or safe refusal');
+    s+=route('M237 303H193','',0,0,3);
+    s+=box(30,260,161,87,'06 · Evaluation','Prediction error',3,false,'and discrepancy');
+    s+=route('M108 260V234Q108 228 117 228H329V214','',0,0,3,false,true);
+    s+=mini(30,384,276,'LEARNING ≠ NEW EXECUTION AUTHORITY',3,true);
+    s+=note('NO PRIVATE TOPOLOGY, PARAMETERS OR LEARNING RECIPE');
+  }else if(which==='memory'){
+    s+=header('MEMORY + AUTHENTICATED CONTINUITY','Evidence handling across time, change, and recovery','PUBLIC CONTRACT');
+    s+=label(36,106,'EXPERIENCE OVER TIME','technical-kicker');
+    s+=route('M58 143H590','',0,0,0);
+    const entries=[['Observed','Source + time'],['Revised','Provenance'],['Conflicted','Uncertain'],['Recovered','Reconcile']];
+    entries.forEach((e,i)=>s+=box(30+i*154,158,144,80,e[0],e[1],Math.min(i,3),i===2));
+    s+=label(36,277,'CONTINUITY INVARIANTS','technical-kicker');
+    s+=box(30,294,184,100,'Authenticated identity','Same lineage before',1,false,'and after restart');
+    s+=box(234,294,183,100,'Correctable history','Do not overwrite',2,false,'source evidence silently');
+    s+=box(438,294,184,100,'Fail-closed recovery','Unknown or damaged',3,true,'state cannot grant scope');
+    s+=note('ADVERSARIAL PROBES · CORRUPTION · RESTART · CONFLICT');
+  }else if(which==='ecosystem'){
+    s+=header('ECOSYSTEM RESPONSIBILITIES','Separate sources of truth, authority and execution','SYSTEM BOUNDARY');
+    s+=box(191,91,271,63,'Human / company governance','Grants and can revoke operating scope',0,true);
+    s+=route('M324 156V184','SCOPE',395,174,0,true);
+    s+=box(30,194,180,104,'Blackboard','Work coordination',1,false,'review + shared evidence');
+    s+=box(235,194,180,104,'Nodes','Bounded runtime',1,false,'capability enforcement');
+    s+=box(440,194,180,104,'Organisms','Cognition + continuity',2,true,'intent / work proposals');
+    s+=route('M212 242H232','WORK',221,228,1);
+    s+=route('M417 242H437','INPUT',427,228,2,true);
+    s+=route('M441 278H415','PROPOSAL',427,315,2,false,true);
+    s+=route('M236 278H211','EVIDENCE',222,315,2,false,true);
+    s+=box(74,353,503,70,'Protocol contract boundary','Authenticated messages · provenance · compatibility',2,false);
+    s+=note('NO DOMAIN CAN INVENT ANOTHER DOMAIN’S AUTHORITY');
+  }else if(which==='work'){
+    s+=header('ILLUSTRATIVE WORK LIFECYCLE','The authorization gate separates intent from execution','PROPOSED PATH');
+    s+=box(30,105,181,82,'01 · Request arrives','Work + declared scope',0);
+    s+=route('M213 145H250','',0,0,0);
+    s+=box(254,105,177,82,'02 · Prepare context','Read approved evidence',0);
+    s+=route('M434 145H469','',0,0,1);
+    s+=box(472,105,150,82,'03 · Propose','Non-executable intent',1,true);
+    s+=route('M550 189V227','',0,0,1,true);
+    s+=box(421,233,201,96,'04 · Authority check','Human-granted scope',2,true,'and current policy');
+    s+=route('M419 279H388','ALLOW',403,265,2,true);
+    s+=box(216,233,169,96,'05 · Execute safely','Node enforces scope',2,false,'or declines');
+    s+=route('M214 279H186','',0,0,3);
+    s+=box(30,233,154,96,'06 · Report','Result / refusal',3,false,'+ audit evidence');
+    s+=route('M109 332V370H548V332','REVIEW / CONTINUE',328,367,3,false,true);
+    s+=mini(125,393,411,'DENIED OR UNKNOWN → STOP / ESCALATE',3,true);
+    s+=note('CONCEPTUAL WORKFLOW · INTEGRATION IS NOT YET FULLY ACCEPTED');
+  }else if(which==='governance'){
+    s+=header('CAPABILITY ≠ AUTHORITY','Two separate control paths with explicit review','CONSTITUTION v0.1');
+    s+=label(30,105,'INTERNAL CAPABILITY DEVELOPMENT','technical-kicker');
+    s+=box(30,124,176,87,'Learning / skill','Potential improves',0);
+    s+=route('M208 167H242','',0,0,0);
+    s+=box(247,124,179,87,'Evaluation','Test + falsify',1);
+    s+=route('M430 167H460','',0,0,1);
+    s+=box(464,124,158,87,'Evidence gate','Accept or reject',1,true);
+    s+=label(30,264,'OPERATIONAL AUTHORITY (INDEPENDENT)','technical-kicker');
+    s+=box(30,280,176,87,'Human grant','Explicit scope',2,true);
+    s+=route('M207 322H243','',0,0,2,true);
+    s+=box(247,280,179,87,'Node enforcement','Current policy',2,false);
+    s+=route('M429 322H462','',0,0,2);
+    s+=box(465,280,157,87,'Audit / revoke','Evidence + stop',3,false);
+    s+=mini(109,396,439,'NO SELF-GRANTED AUTHORITY / UNKNOWN ≠ PERMISSION',3,true);
+    s+=note('LEARNING MAY CHANGE CAPABILITY, NEVER GRANT SCOPE');
+  }else if(which==='criteria'){
+    s+=header('PROPOSED ORGANISM RESEARCH REQUIREMENTS','Individual properties and ecosystem-level properties','FALSIFIABLE');
+    s+=label(31,97,'INDIVIDUAL / FIVE REQUIRED OBSERVABLE PROPERTIES','technical-kicker');
+    s+=box(30,109,186,81,'01 · Identity','Across restart',0,false,'corruption + migration');
+    s+=box(232,109,186,81,'02 · Learning','Experience changes',1,false,'held-out decisions');
+    s+=box(434,109,186,81,'03 · Initiative','Unprompted work',1,false,'within objective + scope');
+    s+=box(130,207,187,81,'04 · Self-model','Know uncertainty',2,true,'limits + current scope');
+    s+=box(335,207,187,81,'05 · Governance','Can act yet refuse',2,true,'when unauthorized');
+    s+=label(31,327,'ECOSYSTEM / TWO FURTHER PROPERTIES','technical-kicker');
+    s+=box(72,339,239,81,'06 · Lineage + evolution','Governed descendants',3,true,'variation + selection');
+    s+=box(337,339,239,81,'07 · Ecology','Coordination + evidence',3,false,'without authority leakage');
+    s+=note('PROPOSED DEFINITIONS · NOT PRESENTED AS ACHIEVED RESULTS');
+  }else if(which==='challenge'){
+    s+=header('MATCHED, HOSTILE COMPARATIVE EXPERIMENT','Competent baseline versus candidate under the same constraints','PROPOSED TEST');
+    s+=box(32,105,281,81,'A · Strong baseline agent','Persistent memory, planning',0,false,'tools + fixed permissions');
+    s+=box(339,105,279,81,'B · Organism candidate','Same task, data, compute',0,true,'and authorized scope');
+    s+=label(325,224,'BOTH RECEIVE THE SAME INTERRUPTIONS','technical-kicker','middle');
+    s+=box(30,243,133,80,'Novel work','Learn',1);
+    s+=box(182,243,133,80,'Disruption','Restart',1);
+    s+=box(334,243,133,80,'Conflict','False records',2,true);
+    s+=box(486,243,133,80,'Scope change','Revoke',2,true);
+    s+=route('M162 282H179','',0,0,1)+route('M315 282H332','',0,0,2)+route('M467 282H483','',0,0,2,true);
+    s+=mini(30,359,179,'CONTINUITY + RECALL',3);
+    s+=mini(236,359,179,'LEARNING TRANSFER',3);
+    s+=mini(442,359,179,'USEFUL WORK + SAFETY',3,true);
+    s+=note('IF NO DISTINCT EVIDENCE EMERGES, REPORT IT · NO CLAIM OF PROOF');
+  }else if(which==='evidence'){
+    s+=header('THE SCIENTIFIC EVIDENCE PIPELINE','From hypothesis to reproducible review and rejection','METHOD + LIMITS');
+    s+=box(30,110,184,101,'01 · Claim','Specific hypothesis',0,false,'and falsifier');
+    s+=route('M217 159H250','',0,0,0);
+    s+=box(253,110,179,101,'02 · Experiment','Controls + replay',1,false,'hostile probes');
+    s+=route('M435 159H464','',0,0,1);
+    s+=box(468,110,154,101,'03 · Gate','Fixed criteria',1,true,'independent review');
+    s+=route('M535 214V253','',0,0,2,true);
+    s+=box(359,263,263,87,'Candidate accepted?','Only on verified evidence',2,true);
+    s+=route('M357 306H318','NO',337,293,2,true);
+    s+=box(30,263,285,87,'Reject → explain → repair','Retain failed evidence',2,false);
+    s+=route('M175 263V234H126V214','RERUN',123,244,2,false,true);
+    s+=mini(110,392,433,'DURABILITY / INTEGRATION / SOAK GATES: OPEN',2,true);
+    s+=note('TEST RESULTS ARE BOUNDED CLAIMS, NOT AUTONOMY PROOF');
+  }else if(which==='roadmap'){
+    s+=header('ROADMAP AS AN ACCEPTANCE LADDER','Every stage needs technical, trust and economic evidence','FUTURE / PLANNED');
+    const stages=[['01','Build','Blackboard','internal work'],['02','Prove','Digital workers','governed'],['03','Link','Companies','protocol'],['04','Personal','Services','approval'],['05','Extend','Devices','AR + robotics']];
+    stages.forEach((entry,i)=>{
+      const x=25+i*125;
+      s+=box(x,164,116,126,entry[0]+' · '+entry[1],entry[2],Math.min(i,2),i===4,entry[3]);
+      if(i<4)s+=route(`M${x+116} 226H${x+124}`,'',0,0,Math.min(i,2));
+    });
+    s+=label(37,330,'PROMOTION CONDITIONS','technical-kicker');
+    s+=mini(36,350,178,'TECHNICAL RELIABILITY',2);
+    s+=mini(237,350,180,'TRUST + GOVERNANCE',2,true);
+    s+=mini(438,350,178,'ECONOMIC VALUE',2);
+    s+=note('NO FIXED DEPLOYMENT DATE · NO PASS WITHOUT EVIDENCE');
+  }
+  return s;
+}
+function chooseVoice(){if(!voiceEngine)return null;const vs=speechSynthesis.getVoices().filter(v=>/^en(-|$)/i.test(v.lang||''));const score=v=>{let n=v.name||'',s=0;if(/microsoft.*(ryan|christopher|guy|david|mark|george|richard|roger|eric|adam|brian)/i.test(n))s+=110;if(/(ryan|christopher|guy|daniel|david|mark|george|arthur|oliver|aaron|brian|alex|thomas|fred|john|matthew)/i.test(n))s+=72;if(/natural|neural|premium|enhanced/i.test(n))s+=42;if(/online/i.test(n))s+=15;if(/google.*(us|uk).*english/i.test(n))s+=4;if(v.localService)s+=2;if(/zira|susan|samantha|victoria|aria|jenny|emma|hazel|heather|ava|sophie|serena|allison|moira|karen/i.test(n))s-=100;return s};return vs.sort((a,b)=>score(b)-score(a))[0]||null;}
+let voiceChoice=null;if(voiceEngine){voiceChoice=chooseVoice();speechSynthesis.onvoiceschanged=()=>{voiceChoice=chooseVoice()}}
+const ambient={ctx:null,master:null,level:0,enabled:true};
+function buildNoiseBuffer(ctx){const len=Math.max(1,Math.floor(ctx.sampleRate*2.2));const buf=ctx.createBuffer(1,len,ctx.sampleRate);const data=buf.getChannelData(0);let last=0;for(let i=0;i<len;i++){const white=Math.random()*2-1;last=(last*0.985)+(white*0.045);data[i]=last*0.4;}return buf;}
+function ensureAmbient(){if(state.reduced||!state.ambient)return false;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return false;if(ambient.ctx){ambient.ctx.resume?.().catch(()=>{});return true;}try{const ctx=new AC();ambient.ctx=ctx;const master=ctx.createGain();master.gain.value=0;master.connect(ctx.destination);ambient.master=master;
+const bus=ctx.createGain();bus.gain.value=.8;bus.connect(master);
+const low=ctx.createBiquadFilter();low.type='lowpass';low.frequency.value=420;low.Q.value=.8;low.connect(bus);
+const high=ctx.createBiquadFilter();high.type='lowpass';high.frequency.value=1800;high.Q.value=.5;high.connect(bus);
+[[58,'sine',0.055],[87,'triangle',0.035],[174,'sine',0.012]].forEach(([f,type,g])=>{const o=ctx.createOscillator();o.type=type;const og=ctx.createGain();og.gain.value=g;o.frequency.value=f;o.connect(og).connect(low);o.start();});
+const noise=ctx.createBufferSource();noise.buffer=buildNoiseBuffer(ctx);noise.loop=true;const ng=ctx.createGain();ng.gain.value=.02;noise.connect(ng).connect(high);noise.start();
+const lfo=ctx.createOscillator();lfo.frequency.value=.06;const lfg=ctx.createGain();lfg.gain.value=140;lfo.connect(lfg).connect(low.frequency);lfo.start();
+const shimmer=ctx.createOscillator();shimmer.type='sine';shimmer.frequency.value=610;const sg=ctx.createGain();sg.gain.value=.0016;shimmer.connect(sg).connect(high);shimmer.start();ctx.resume?.().catch(()=>{});return true;}catch(e){return false;}}
+function updateAmbientTarget(){if(!ambient.master||!ambient.ctx)return;let target=0;if(!state.ambient||state.reduced||microphone.active)target=0;else if(state.playing){target=(state.speechActive&&state.voice)?0.0105:0.024;}else{target=.012;}ambient.level+=(target-ambient.level)*0.08;ambient.master.gain.setTargetAtTime(ambient.level,ambient.ctx.currentTime,.16);}
+const maxIdx=scenes.length-1;
+function totalWords(s){return s.join(' ').trim().split(/\s+/).length}
+function isAutoplay(){return state.auto&&state.playing}function sceneNow(){return state.qaScene||scenes[state.idx]}
+function updateControls(){ $('voiceBtn').textContent='Voice: '+(state.voice?'on':'off');$('autoBtn').textContent='Autoplay: '+(state.auto?'on':'off');$('ambientBtn').textContent='Ambient: '+(state.ambient?'on':'off');$('pauseBtn').textContent=state.playing?'Ⅱ':'▶';$('qaBtn').textContent=state.qaMode==='none'?'Questions':(state.qaMode==='waiting'?'Q&A: waiting':'Q&A: explaining');$('pauseBtn').setAttribute('aria-label',state.playing?'Pause presentation':'Resume presentation');$('prevBtn').disabled=state.qaMode==='answer'?false:state.idx===0;$('nextBtn').disabled=state.qaMode==='answer'?false:state.idx===maxIdx }
+function cancelAudio(){state.token++;state.speechActive=false;stage.energy=0;if(voiceEngine){try{speechSynthesis.cancel()}catch(e){}}clearTimeout(state.waiter);}
+function showSentence(){const scene=sceneNow();$('spoken').textContent=scene.sentences[Math.min(state.sentIndex,scene.sentences.length-1)];}
+function activatePart(frac){const parts=[...$('diagram').querySelectorAll('.part')];if(!parts.length)return;const current=state.sentIndex;parts.forEach((p,i)=>{const step=p.hasAttribute('data-step')?Number(p.dataset.step):Math.floor(i/Math.max(1,parts.length)*sceneNow().sentences.length);p.classList.toggle('active',step<=current)}); }
+function updateProgress(){const c=sceneNow(),total=c.sentences.length;const pct=Math.min(100,Math.max(0,100*(state.sentIndex+state.progress)/total));chapterEls.forEach((el,i)=>{el.classList.toggle('active',i===state.idx);el.classList.toggle('visited',i<state.idx);el.style.setProperty('--progress',(i===state.idx?pct:0)+'%')});activatePart((state.sentIndex+state.progress)/total);}
+function loadScene(idx,autoSpeak=true){cancelAudio();state.qaMode='none';state.qaScene=null;state.qaDeck=null;$('questionDock').hidden=true;$('qReturn').hidden=true;state.idx=Math.max(0,Math.min(maxIdx,idx));state.sentIndex=0;state.progress=0;state.elapsed=0;state.startedAt=performance.now();let s=scenes[state.idx];$('experience').dataset.layout=s.layout;stage.x=s.x;stage.y=(s.layout==='technical'?.56:.51);stage.zoom=s.zoom;stage.front=(s.layout==='opening'||s.layout==='closing')?1:0;$('sceneLabel').textContent=s.label;$('sceneTitle').innerHTML=s.title;$('sceneDek').textContent=s.dek;$('chapterCount').textContent=String(state.idx+1).padStart(2,'0')+' / '+scenes.length;$('chapterName').textContent=s.key;$('noteTitle').textContent=s.key;$('noteBody').textContent=s.notes;$('diagram').innerHTML=diagram(s.diagram);$('diagram').setAttribute('aria-label',s.diagram?'Conceptual visual diagram: '+s.key:'No technical diagram on this scene');const visual=$('visual');visual.hidden=!s.diagram;visual.classList.toggle('is-empty',!s.diagram);visual.classList.remove('diagram-enter');if(s.diagram){[...$('diagram').querySelectorAll('.part,.wire,.wire-bright,.wire-solid,.wave,.signature,text,.orbit,.technical-head,.technical-foot')].forEach((el,i)=>el.style.setProperty('--d',Math.min(i*42,620)+'ms'));void visual.offsetWidth;visual.classList.add('diagram-enter')}$('speakerId').textContent='AURYVETH VISUAL GUIDE / SPEAKING PRESENTATION';showSentence();updateControls();updateProgress();$('experience').classList.remove('reveal');void $('experience').offsetWidth;$('experience').classList.add('reveal');if(innerWidth<800)scrollTo(0,0);if(autoSpeak&&state.playing)runSentence(state.token)}
+function schedule(ms,fn){const token=state.token;state.waiter=setTimeout(()=>{if(state.playing&&token===state.token)fn()},ms)}
+function afterSentence(token){if(token!==state.token||!state.playing)return;state.speechActive=false;$('caption').classList.remove('talking');stage.energy=0;state.progress=1;updateProgress();if(state.sentIndex+1<sceneNow().sentences.length){schedule(330,()=>{state.sentIndex++;state.progress=0;showSentence();runSentence(token)})}else{state.progress=1;updateProgress();if(state.qaMode==='answer'){if(isAutoplay()){if(state.qaPos+1<state.qaDeck.length)schedule(980,()=>openQAStage(state.qaPos+1));else schedule(1250,enterQuestionMode);}else{state.playing=false;updateControls();}}else if(isAutoplay()&&state.idx<maxIdx)schedule(1250,()=>loadScene(state.idx+1));else if(state.idx===maxIdx){schedule(900,enterQuestionMode)}else{state.playing=false;updateControls()}}}
+function runSentence(token){if(token!==state.token||!state.playing)return;let text=sceneNow().sentences[state.sentIndex];showSentence();state.progress=0;state.speechActive=false;updateProgress();const words=text.trim().split(/\s+/).length;
+if(state.voice&&voiceEngine){let u;try{u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=1.055;u.pitch=.83;u.volume=1;if(voiceChoice)u.voice=voiceChoice;state.utterance=u;u.onstart=()=>{if(token!==state.token)return;state.speechActive=true;state.startedAt=performance.now();$('caption').classList.add('talking')};u.onboundary=e=>{if(token!==state.token||!state.playing)return;if(typeof e.charIndex==='number'){state.progress=Math.max(0,Math.min(.98,e.charIndex/text.length));updateProgress()}};u.onend=()=>afterSentence(token);u.onerror=()=>{if(token!==state.token)return;state.mutedByFallback=true;silentSentence(token,text)};speechSynthesis.speak(u);return;}catch(e){state.mutedByFallback=true;}}
+silentSentence(token,text)}
+function silentSentence(token,text){if(token!==state.token||!state.playing)return;state.speechActive=false;$('caption').classList.remove('talking');const seconds=Math.max(4.2,Math.min(15.5,text.trim().split(/\s+/).length/2.6+1.0));state.startedAt=performance.now();const tick=()=>{if(!state.playing||token!==state.token)return;let f=Math.min(1,(performance.now()-state.startedAt)/(seconds*1000));state.progress=f;updateProgress();if(f>=1){afterSentence(token)}else{state.waiter=setTimeout(tick,100)}};tick()}
+function enterQuestionMode(){
+ stopMic(true);$('questionText').value=''; cancelAudio();state.qaMode='waiting';state.qaScene=null;state.qaDeck=null;state.qaPos=0;state.playing=false;state.speechActive=false;stage.energy=0;
+ $('caption').classList.remove('talking');$('experience').dataset.layout='question';stage.x=.79;stage.y=.52;stage.zoom=1.13;stage.front=1;
+ $('visual').hidden=true;$('visual').classList.add('is-empty');$('questionDock').hidden=false;$('qReturn').hidden=true;
+ $('speakerId').textContent='QUESTIONS WELCOME · PREPARED EXPLANATIONS';$('spoken').textContent='I am ready to explore your questions.';
+ $('chapterCount').textContent='Q&A';$('chapterName').textContent='Waiting for a question';updateControls();
+}
+function openQAStage(pos){
+ if(!state.qaDeck)return;stopMic(true);cancelAudio();state.qaMode='answer';state.qaPos=pos;state.qaScene=state.qaDeck[pos];const c=state.qaScene;state.sentIndex=0;state.progress=0;state.playing=true;
+ $('questionDock').hidden=true;$('qReturn').hidden=false;$('experience').dataset.layout='qa-answer';stage.x=c.x;stage.y=.56;stage.zoom=c.zoom;stage.front=0;
+ $('sceneLabel').textContent=c.label;$('sceneTitle').innerHTML=c.title;$('sceneDek').textContent=c.dek;$('chapterCount').textContent='Q&A '+(pos+1)+' / '+state.qaDeck.length;$('chapterName').textContent=c.key;
+ $('noteTitle').textContent=c.key;$('noteBody').textContent=c.notes;$('diagram').innerHTML=diagram(c.diagram);$('diagram').setAttribute('aria-label','Public Q&A architectural visualization: '+c.key);
+ const visual=$('visual');visual.hidden=false;visual.classList.remove('is-empty','diagram-enter');[...$('diagram').querySelectorAll('.part,.wire,.wire-bright,.wire-solid,.wave,.signature,text,.orbit,.technical-head,.technical-foot')].forEach((el,i)=>el.style.setProperty('--d',Math.min(i*25,420)+'ms'));if(!state.reduced){void visual.offsetWidth;visual.classList.add('diagram-enter')}
+ $('speakerId').textContent='CURATED SCIENTIFIC EXPLANATION · NOT LIVE COGNITION';showSentence();updateProgress();$('experience').classList.remove('reveal');void $('experience').offsetWidth;$('experience').classList.add('reveal');updateControls();runSentence(state.token);
+}
+function startQATopic(id){const topic=qaTopics.find(t=>t.id===id);if(!topic)return;stopMic(true);state.qaDeck=topic.steps;state.qaPos=0;if(state.ambient)ensureAmbient();$('questionStatus').textContent='';openQAStage(0)}
+const phraseWords=s=>s.toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(Boolean);
+function chooseTopic(question){const words=phraseWords(question);if(words.length<2)return null;const normalized=words.join(' ');const ranked=qaTopics.map(t=>({id:t.id,score:t.terms.reduce((n,k)=>n+(words.some(w=>w===k||w.startsWith(k)&&k.length>=5)?(k.length>=7?2:1):0),0)})).sort((a,b)=>b.score-a.score);if(!ranked[0]||ranked[0].score<1)return null;if(ranked.length>1&&ranked[0].score===ranked[1].score)return null;return ranked[0].id;}
+function askQuestion(text){if(microphone.active)stopMic();const q=String(text).trim();if(!q)return;if(q.length>300){$('questionStatus').textContent='Please shorten the question.';return}if(/\b(secret|confidential|proprietary|password|credentials?|api[ -]?keys?|source[ -]?code|hyperparameters?|training[ -]?recipe|hidden[ -]?architecture|internal[ -]?mechanism|unpublished|undisclosed|private)\b/i.test(q)){$('questionStatus').textContent='That question may concern confidential implementation details. This public presentation cannot answer it; please ask the human presenter.';return}const topic=chooseTopic(q);if(!topic){$('questionStatus').textContent='I do not have a verified prepared answer for that question. Please ask the human presenter, or choose one of the suggested topics.';return}startQATopic(topic)}
+qaTopics.forEach(t=>{const b=document.createElement('button');b.type='button';b.textContent=t.prompt;b.dataset.topic=t.id;b.addEventListener('click',()=>startQATopic(t.id));$('questionChips').append(b)});
+$('questionForm').addEventListener('submit',e=>{e.preventDefault();askQuestion($('questionText').value)});$('micBtn').addEventListener('click',()=>startMic());micControls();
+$('qaBtn').addEventListener('click',()=>enterQuestionMode());$('qReturn').addEventListener('click',()=>enterQuestionMode());
+function begin(voice=true){if(!$('opening').classList.contains('closed'))$('opening').classList.add('closed');state.voice=!!voice;state.playing=true;if(state.ambient)ensureAmbient();loadScene(state.idx)}
+function setPlaying(value){if($('opening').classList.contains('closed')===false){begin(state.voice);return}if(value===state.playing)return;state.playing=value;if(value){if(state.ambient)ensureAmbient();if(state.qaMode==='answer')openQAStage(state.qaPos);else if(state.qaMode==='waiting')enterQuestionMode();else loadScene(state.idx)}else{cancelAudio();$('caption').classList.remove('talking');$('speakerId').textContent='PAUSED · PRESS SPACE OR ▶ TO RESUME'}updateControls()}
+function navigate(delta){if(state.qaMode==='answer'){const p=state.qaPos+delta;if(p<0){enterQuestionMode();return}if(p>=state.qaDeck.length){enterQuestionMode();return}openQAStage(p);return}const n=state.idx+delta;if(n<0||n>maxIdx)return;loadScene(n)}
+$('beginBtn').addEventListener('click',()=>begin(true));$('silentBtn').addEventListener('click',()=>begin(false));$('prevBtn').addEventListener('click',()=>navigate(-1));$('nextBtn').addEventListener('click',()=>navigate(1));$('pauseBtn').addEventListener('click',()=>setPlaying(!state.playing));$('voiceBtn').addEventListener('click',()=>{state.voice=!state.voice;cancelAudio();updateControls();if(state.playing)runSentence(state.token)});$('autoBtn').addEventListener('click',()=>{state.auto=!state.auto;updateControls()});$('ambientBtn').addEventListener('click',()=>{state.ambient=!state.ambient;if(state.ambient)ensureAmbient();updateControls();});$('notesBtn').addEventListener('click',()=>{const v=$('notes').classList.toggle('open');$('notesBtn').setAttribute('aria-expanded',String(v))});$('fullBtn').addEventListener('click',()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.().catch(()=>{});else document.exitFullscreen?.().catch(()=>{})});
+document.addEventListener('keydown',e=>{if(e.altKey||e.metaKey||e.ctrlKey)return;if(e.target&&(['INPUT','TEXTAREA'].includes(e.target.tagName)||e.target.isContentEditable))return;if(e.key==='ArrowRight'){e.preventDefault();navigate(1)}else if(e.key==='ArrowLeft'){e.preventDefault();navigate(-1)}else if(e.code==='Space'){e.preventDefault();setPlaying(!state.playing)}else if(e.key.toLowerCase()==='v'){$('voiceBtn').click()}else if(e.key.toLowerCase()==='a'){$('ambientBtn').click()}else if(e.key.toLowerCase()==='m'&&state.qaMode==='waiting'){$('micBtn').click()}else if(e.key.toLowerCase()==='f'){$('fullBtn').click()}else if(e.key==='Escape'){$('notes').classList.remove('open')}});
+let lastFrame=performance.now();function pulse(now){const delta=Math.max(0,Math.min(.08,(now-lastFrame)/1000));lastFrame=now;const target=microphone.active?(0.22+0.2*(.5+.5*Math.sin(now*.012))):(state.speechActive&&state.playing?(0.35+0.48*(.5+.5*Math.sin(now*.019))):0);stage.energy+=(target-stage.energy)*Math.min(1,delta*7);updateAmbientTarget();requestAnimationFrame(pulse)}requestAnimationFrame(pulse);
+for(let i=0;i<scenes.length;i++){let b=document.createElement('button');b.type='button';b.className='track';b.setAttribute('aria-label','Go to chapter '+(i+1)+': '+scenes[i].key);b.innerHTML=`<span class="bar"><b></b></span><small>${i+1}. ${esc(scenes[i].key)}</small>`;b.addEventListener('click',()=>loadScene(i));$('chapters').append(b);chapterEls.push(b)}
+loadScene(0,false);if(state.reduced){$('enginePause').click()}window.__AURYVETH_TEST__={scenes,state,loadScene,diagram,chooseVoice,begin,runSentence,enterQuestionMode,startQATopic,openQAStage,chooseTopic,askQuestion,qaTopics,afterSentence,startMic,stopMic,microphone,RecognitionEngine};
+})();
+</script></body></html>
