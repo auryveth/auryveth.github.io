@@ -35,6 +35,10 @@ const showcaseHtml=fs.readFileSync('src/content/pages/index.html','utf8');
 for(const marker of ['durationMs=28000','requestAnimationFrame(timelineFrame)','document.addEventListener(\'visibilitychange\',syncPlayback)','document.addEventListener(\'auryveth-motion-change\',syncPlayback)']){
  if(!showcaseJs.includes(marker))throw Error(`Timed organism showcase missing: ${marker}`);
 }
+for(const marker of ['elapsedMs=(elapsedMs+delta)%durationMs;','const shouldPlay=inView && !document.hidden && motionEnabled;']){
+ if(!showcaseJs.includes(marker))throw Error(`Looping organism showcase missing: ${marker}`);
+}
+if(showcaseJs.includes('elapsedMs>=durationMs'))throw Error('Organism timeline still terminates after one cycle');
 if(showcaseJs.includes('window.addEventListener(\'scroll\',queueJourney'))throw Error('Organism showcase still scroll-scrubbed');
 if(!showcaseCss.includes('.organism-journey{position:relative;min-height:100svh;'))throw Error('Organism showcase still forces long scroll');
 if(!showcaseHtml.includes('Time-driven overview of the Auryveth digital organism'))throw Error('Showcase accessibility description is stale');
