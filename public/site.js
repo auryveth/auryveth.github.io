@@ -216,6 +216,7 @@ class LivingOrganism {
     if(!this.ctx) return;
     this.seed();
     this.seedStars();
+    if(mode === 'hero') this.seedCinema();
     this.resize();
     if('ResizeObserver' in window){
       this.ro = new ResizeObserver(this.resize);
@@ -231,6 +232,171 @@ class LivingOrganism {
     }, {passive:true});
     host.addEventListener('pointerleave',()=>{this.targetPointerX=0;this.targetPointerY=0;},{passive:true});
     this.setMotion(motionEnabled);
+  }
+
+
+  // Visual-only V2.4 adaptation: irregular three-lobed neural morphology.
+  // No website animation makes a claim about live organism cognition.
+  seedCinema(){
+    let state=7731;
+    const random=()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;};
+    const golden=Math.PI*(3-Math.sqrt(5)),tau=Math.PI*2;
+    this.cinemaNodes=[];this.cinemaEdges=[];this.cinemaPulses=[];
+    const N=380;
+    for(let i=0;i<N;i++){
+      const y=1-2*(i+.5)/N,a=i*golden,r=Math.sqrt(1-y*y);
+      let x=Math.cos(a)*r,z=Math.sin(a)*r,Y=y;
+      const ang=Math.atan2(z,x);
+      const fold=1+.27*Math.sin(3*ang+2.8*Y)+.18*Math.cos(5*Y-2*ang);
+      x*=fold;z*=fold;
+      const twist=Y*1.8+.36*Math.sin(5*Y);
+      const xx=x*Math.cos(twist)-z*Math.sin(twist);
+      z=x*Math.sin(twist)+z*Math.cos(twist);x=xx;
+      Y=Y*.88+.11*Math.sin(3*ang);
+      const layer=i%9===0?.42:1;
+      this.cinemaNodes.push({x:x*layer,y:Y*layer,z:z*layer,phase:random()*tau,layer,size:1+random()*1.4});
+    }
+    for(let i=0;i<N;i++){
+      const a=this.cinemaNodes[i],near=[];
+      for(let j=0;j<N;j++){
+        if(j===i)continue;
+        const b=this.cinemaNodes[j];
+        const d=(a.x-b.x)**2+(a.y-b.y)**2+(a.z-b.z)**2;
+        if(d<.21)near.push([d,j]);
+      }
+      near.sort((a,b)=>a[0]-b[0]);
+      for(const [,j] of near.slice(0,3))if(j>i)this.cinemaEdges.push({a:i,b:j,phase:random(),strength:.4+random()*.6});
+    }
+    if(!this.cinemaEdges.length)throw Error('V2.4 visual topology could not initialize');
+    for(let i=0;i<72;i++)this.cinemaPulses.push({
+      edge:Math.floor(random()*this.cinemaEdges.length),
+      phase:random(),speed:.05+random()*.18,size:1+random()*1.5
+    });
+  }
+
+  drawCinema(){
+    const c=this.ctx,w=this.w,h=this.h;if(!c||w<2||h<2)return;
+    const tau=Math.PI*2,cyan='#65efff',blue='#6daeff',ice='#f0ffff',violet='#a9a0ff';
+    const alpha=(hex,a)=>{const n=parseInt(hex.slice(1),16);return 'rgba('+(n>>16)+','+(n>>8&255)+','+(n&255)+','+clamp(a,0,1)+')';};
+    const dot=(x,y,r,color)=>{c.fillStyle=color;c.beginPath();c.arc(x,y,Math.max(.1,r),0,tau);c.fill();};
+    const line=(a,b,color,size=1)=>{c.strokeStyle=color;c.lineWidth=size;c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke();};
+    const t=this.time,breath=1+.016*Math.sin(t*.83);
+    const rot=.43+t*.11+this.pointerX*.25;
+    const tilt=-.19+.045*Math.sin(t*.31)+this.pointerY*.19;
+    const ca=Math.cos(rot),sa=Math.sin(rot),cp=Math.cos(tilt),sp=Math.sin(tilt);
+    const cx=w*.50,cy=h*.445+Math.sin(t*.5)*h*.008;
+    const scale=Math.min(w*.365,h*.35,360);
+    const project=(x,y,z)=>{
+      const xx=x*ca+z*sa,zz=z*ca-x*sa,yy=y*cp-zz*sp,depth=y*sp+zz*cp;
+      const perspective=3.4/(3.4-depth*.6);
+      return{x:cx+xx*perspective*scale,y:cy+yy*perspective*scale,z:depth,s:perspective};
+    };
+    c.clearRect(0,0,w,h);
+    const loc=this.cinemaNodes.map(n=>{
+      const wave=.062*Math.sin(t*.92+n.phase*2);
+      const f=(1+wave)*breath;
+      let x=n.x*f,y=n.y*f,z=n.z*f;
+      const displacement=.08*Math.sin(t*.4+y*5+n.phase*.2);
+      x+=displacement*Math.sin(y*3);z+=displacement*Math.cos(y*4);
+      return project(x,y,z);
+    });
+    // Transparent soft field rather than the former opaque cell membrane.
+    const halo=c.createRadialGradient(cx-scale*.09,cy-scale*.09,scale*.06,cx,cy,scale*.96);
+    halo.addColorStop(0,alpha(cyan,.13));halo.addColorStop(.45,alpha(blue,.055));
+    halo.addColorStop(1,alpha(cyan,0));
+    c.fillStyle=halo;c.beginPath();c.arc(cx,cy,scale,0,tau);c.fill();
+    // Stable 3D links with depth ordering keep the original topology visible.
+    const ordered=this.cinemaEdges.map(e=>({e,z:(loc[e.a].z+loc[e.b].z)/2})).sort((a,b)=>a.z-b.z);
+    for(const {e,z} of ordered){
+      const depth=clamp((z+1.4)/2.8,0,1);
+      const activity=.5+.5*Math.sin(t*1.3+e.phase*tau);
+      const opacity=(.026+depth*.33+activity*.025)*e.strength;
+      line(loc[e.a],loc[e.b],alpha(e.a%5===0?blue:cyan,opacity),.5+depth*.65);
+    }
+    // V2.4 signature: eleven freely drifting alien ribbons.
+    c.save();c.globalCompositeOperation='screen';
+    for(let k=0;k<11;k++){
+      let prev=null;
+      for(let i=0;i<=140;i++){
+        const u=i/140*tau,kp=k*.71;
+        const radius=.56+.3*Math.sin(3*u+kp)+.17*Math.sin(5*u-kp+t*.31);
+        const a=u+Math.sin(u*3+kp)*.31;
+        const q=project(radius*Math.cos(a),.72*Math.sin(u*.7+kp+t*.13),radius*Math.sin(a+kp*.19));
+        if(prev)line(prev,q,alpha(k%4===0?violet:cyan,.07+clamp((q.z+1)/2,0,1)*.19),.6);
+        prev=q;
+      }
+    }
+    c.restore();
+    // Light moves along real edges, never randomly across the screen.
+    for(const pulse of this.cinemaPulses){
+      const e=this.cinemaEdges[pulse.edge],a=loc[e.a],b=loc[e.b];
+      const u=(pulse.phase+t*pulse.speed)%1;
+      const x=a.x+(b.x-a.x)*u,y=a.y+(b.y-a.y)*u,z=a.z+(b.z-a.z)*u;
+      const depth=clamp((z+1.2)/2.5,0,1);if(depth<.12)continue;
+      const r=pulse.size*(.6+depth*.8),g=c.createRadialGradient(x,y,0,x,y,r*5.5);
+      g.addColorStop(0,alpha(ice,depth*.60));
+      g.addColorStop(.2,alpha(blue,depth*.29));g.addColorStop(1,alpha(cyan,0));
+      c.fillStyle=g;c.beginPath();c.arc(x,y,r*5.5,0,tau);c.fill();
+      dot(x,y,r,alpha(ice,.24+depth*.74));
+    }
+    for(const {q,n} of loc.map((q,i)=>({q,n:this.cinemaNodes[i]})).sort((a,b)=>a.q.z-b.q.z)){
+      const depth=clamp((q.z+1.4)/2.8,0,1);
+      const activity=.72+.28*Math.sin(t*1.8+n.phase);
+      const radius=n.size*q.s*(.48+depth*.72);
+      dot(q.x,q.y,radius*3.2,alpha(cyan,.018+depth*.06));
+      dot(q.x,q.y,radius,alpha(n.layer<.7?blue:cyan,(.2+depth*.72)*activity));
+    }
+    // V2.4's active petal cage, inner roaming organs and iridescent heartbeat.
+    c.save();c.globalCompositeOperation='screen';
+    const coreBreath=1+.085*Math.sin(t*1.08);
+    const field=c.createRadialGradient(cx,cy,scale*.008,cx,cy,scale*.39);
+    field.addColorStop(0,alpha(blue,.30));field.addColorStop(.32,alpha(cyan,.20));
+    field.addColorStop(.70,alpha(violet,.045));field.addColorStop(1,alpha(blue,0));
+    c.fillStyle=field;c.beginPath();c.arc(cx,cy,scale*.39,0,tau);c.fill();
+    for(let petal=0;petal<13;petal++){
+      c.beginPath();
+      for(let j=0;j<=96;j++){
+        const u=j/96*tau,shift=petal*.48;
+        const radius=(.145+.029*Math.sin(5*u+shift+t*.65)+.014*Math.cos(7*u-shift-t*.42))*coreBreath;
+        const a=u+shift*.46+t*.075;
+        const q=project(radius*Math.cos(a),.18*Math.sin(u*1.27+shift+t*.11),radius*Math.sin(a+shift*.31));
+        if(j===0)c.moveTo(q.x,q.y);else c.lineTo(q.x,q.y);
+      }
+      const color=petal%4===0?blue:cyan;
+      c.strokeStyle=alpha(color,.15+.07*Math.sin(t*.8+petal)**2);
+      c.lineWidth=petal%4===0?1.35:.75;
+      c.shadowColor=color;c.shadowBlur=petal%3===0?12:8;c.stroke();
+    }
+    c.shadowBlur=0;
+    const seeds=[];
+    for(let k=0;k<7;k++){
+      const a=k*tau/7+t*(k%2?-.13:.105),drift=.02*Math.sin(t*.6+k*1.9);
+      seeds.push({...project((.105+drift)*Math.cos(a),.106*Math.sin(1.8*a+k*.35+t*.16),(.125-drift)*Math.sin(a)),k});
+    }
+    for(let k=0;k<seeds.length;k++){
+      const a=seeds[k],b=seeds[(k+3)%seeds.length];
+      const middle=project(.038*Math.cos(t*.7+k),.027*Math.sin(t*.8+k),.02*Math.sin(k+t*.6));
+      c.beginPath();c.moveTo(a.x,a.y);c.quadraticCurveTo(middle.x,middle.y,b.x,b.y);
+      c.strokeStyle=alpha(k%2?blue:cyan,.21+.1*Math.sin(t*.7+k)**2);
+      c.lineWidth=.75;c.shadowColor=k%2?blue:cyan;c.shadowBlur=10;c.stroke();
+    }
+    c.shadowBlur=0;
+    for(const s of seeds){
+      const radius=scale*(.045+.009*Math.sin(t*1.1+s.k*2))*coreBreath;
+      const gradient=c.createRadialGradient(s.x-radius*.2,s.y-radius*.26,0,s.x,s.y,radius*2);
+      gradient.addColorStop(0,alpha(ice,.70));
+      gradient.addColorStop(.17,alpha(s.k%2?blue:cyan,.52));
+      gradient.addColorStop(.55,alpha(s.k%2?cyan:blue,.17));
+      gradient.addColorStop(1,alpha(blue,0));
+      c.fillStyle=gradient;c.beginPath();c.arc(s.x,s.y,radius*2,0,tau);c.fill();
+      dot(s.x,s.y,Math.max(1.2,radius*.12),alpha(ice,.88));
+    }
+    const inner=scale*(.065+.01*Math.sin(t*1.24));
+    const heart=c.createRadialGradient(cx-inner*.23,cy-inner*.18,0,cx,cy,inner*2.2);
+    heart.addColorStop(0,alpha(ice,.91));heart.addColorStop(.16,alpha('#a7eaff',.70));
+    heart.addColorStop(.42,alpha(cyan,.28));heart.addColorStop(1,alpha(blue,0));
+    c.fillStyle=heart;c.beginPath();c.arc(cx,cy,inner*2.2,0,tau);c.fill();
+    c.restore();
   }
 
   seed(){
@@ -291,11 +457,12 @@ class LivingOrganism {
     this.progress += (this.targetProgress-this.progress)*Math.min(1,dt*.0065);
     this.pointerX += (this.targetPointerX-this.pointerX)*Math.min(1,dt*.005);
     this.pointerY += (this.targetPointerY-this.pointerY)*Math.min(1,dt*.005);
-    this.draw();
+    if(this.mode!=='hero'||now-(this.lastHeroDraw||0)>=33){this.draw();this.lastHeroDraw=now;}
     requestAnimationFrame(this.frame);
   }
 
   draw(){
+    if(this.mode==='hero')return this.drawCinema();
     const c=this.ctx,w=this.w,h=this.h;if(!c||w<2||h<2)return;
     c.clearRect(0,0,w,h);
     const p=this.progress;
